@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Skills>
+	<Skill id ="0" name="Kick">
+		<dmg>8.5</dmg>
+		<cd>12</cd>
+		<melee>true</melee>
+		<self>false</self>
+	</Skill>
+	<Skill id ="1" name="Acid Spray">
+		<dmg>5</dmg>
+		<cd>15</cd>
+		<melee>false</melee>
+		<self>false</self>
+	</Skill>
+</Skills>
