@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+[CreateAssetMenu]
 public class PlayerInfo : ScriptableObject
 {
     public float health;
+    public float max_health;
     public float nerve;
+    public float max_nerve;
     private List<Stat> stat_block = new List<Stat>();
+    //[System.NonSerialized]
+    //public UnityEvent<int> 
 
-    private void Awake()
-    {
-        
-    }
-
-    void Start()
+    private void OnEnable()
     {
         
     }

@@ -1,7 +1,0 @@
-<Skill name="Kick">
-    <id>0</id>
-	<dmg>8.5</dmg>
-    <cd>3</cd>
-	<melee>true</melee>
-    <self>false</self>
-</Skill>

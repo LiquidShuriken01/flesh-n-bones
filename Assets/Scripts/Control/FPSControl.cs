@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class FPSControl : MonoBehaviour
 {
+    public PlayerInfo PlayerInfo;
+
     public float turnSpeed = 4.0f;
     public float moveSpeed = 2.0f;
     public float minTurnAngle = -80.0f;
