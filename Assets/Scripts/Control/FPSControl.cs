@@ -17,6 +17,8 @@ public class FPSControl : MonoBehaviour
     GameObject cam;
     Ray contextRay;
 
+    bool paused = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,12 @@ public class FPSControl : MonoBehaviour
         if (Physics.Raycast(contextRay, out RaycastHit hit, interactDist, layersToHit))
         {
             Debug.Log($"Looking at {hit.collider.gameObject.tag}");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            paused = !paused;
+            Time.timeScale = paused ? 0f : 1.0f;
         }
     }
 }
