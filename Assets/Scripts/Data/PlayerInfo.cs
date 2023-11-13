@@ -1,33 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu]
-public class PlayerInfo : ScriptableObject
+public class PlayerInfo : CharacterInfo
 {
-    public float health;
-    public float max_health;
-    public float nerve;
-    public float max_nerve;
-    private List<Stat> stat_block = new List<Stat>();
-    //[System.NonSerialized]
-    //public UnityEvent<int> 
-
-    private void OnEnable()
+    void OnEnable()
     {
-        
+        this.name = "Player";
     }
 
-    public float GetStat(string statName)
+    public void Attack(GameObject target)
     {
-        foreach (Stat stat in stat_block)
+        if (target.tag == "Enemy")
         {
-            if(stat.IsStatName(statName))
-            {
-                return stat.total_value;
-            }
+            //target.GetComponent<>
         }
-        return 0;
     }
 }

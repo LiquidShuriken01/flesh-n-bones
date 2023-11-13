@@ -22,7 +22,7 @@ public class Modifier
         this.duration = duration;
         this.mod_type = modType;
     }
-
+    
     public bool Tick()
     {
         if (this.duration > 0)
@@ -47,16 +47,20 @@ public class Stat
             }
             return value;
         }
+
+        private set { }
     }
     private string name;
     private bool is_dirty = false;
+    private bool rounding;
     private float value;
     private Dictionary<string, Modifier> modifiers;
     
-    public Stat(string n, float baseValue) 
+    public Stat(string n, float baseValue, bool rounding) 
     {
         this.name = n;
         this.base_value = baseValue;
+        this.rounding = rounding;
         this.modifiers = new Dictionary<string,Modifier>();
     }
 
@@ -89,7 +93,8 @@ public class Stat
                 _value += kvp.Value.value * base_value;
             }
         }
-        return (float)System.Math.Round(_value, 3);
+        if (rounding)  { return (float)System.Math.Round(_value, 0); }
+        else  { return (float)System.Math.Round(_value, 3); }
     }
 
     public void ClearModifiers()
@@ -104,6 +109,9 @@ public class Stat
         return (statName == name);
     }
 
+    /* progresses time for each Modifier affecting .this Stat
+     * call this in Update() of PlayerInfo for each Stat in its list
+     */
     public void ModifierTick()
     {
         List<string> srcToRemove = new List<string>();
@@ -125,28 +133,20 @@ public class Stat
 }
 
 [System.Serializable]
-[XmlRoot("Skill")]
 public class Skill
 {
-    [XmlAttribute("id")]
     public uint id;
-    [XmlAttribute("name")]
     public string name;
     public float dmg;
     public float cd;
-    [XmlElement("melee")]
-    public bool is_melee;
-    [XmlElement("self")]
-    public bool self_target;
+    public List<string> tags;
+    public List<uint> effects;
 }
 
 [System.Serializable]
-[XmlRoot("Organ")]
 public class Organ
 {
-    [XmlAttribute("id")]
     public uint id;
-    [XmlAttribute("name")]
     public string name;
     private string buff_json;
     private Dictionary<string, int> modifiers = new Dictionary<string, int>();

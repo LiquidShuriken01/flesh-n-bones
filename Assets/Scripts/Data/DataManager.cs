@@ -8,6 +8,19 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+
+    [System.Serializable]
+    private class SkillList
+    {
+        public List<Skill> _list;
+    }
+
+    [System.Serializable]
+    private class OrganList
+    {
+        public List<Organ> _list;
+    }
+
     public static DataManager _instance { get; private set; }
 
     /*[SerializeField]
@@ -36,25 +49,17 @@ public class DataManager : MonoBehaviour
             Debug.Log($"{skill.name}");
         }
     }
-
+    
     private void LoadSkills()
     {
         Debug.Log("Loading skill data...");
 
-        int count = 0;
         string path = $"{Application.dataPath}/Data/skills.xml";
-        XmlTextReader reader = new XmlTextReader(path);
-        while (reader.ReadToFollowing("Skill"))
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Skill));
-            Skill deserialized = (Skill)serializer.Deserialize(reader.ReadSubtree());
-            if (deserialized == null) { continue; }
-            skill_list.Add(deserialized);
-            count++;
-        }
+        string json = File.ReadAllText(path);
+        SkillList skillList = JsonUtility.FromJson<SkillList>(json);
+        skill_list = skillList._list;
 
-        reader.Close();
-        Debug.Log($"... success! {count} skills loaded");
+        Debug.Log($"... success! {skill_list.Count} skills loaded");
     }
 
     private void LoadOrgans()

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class FPSControl : MonoBehaviour
 {
@@ -43,7 +45,8 @@ public class FPSControl : MonoBehaviour
         // Draw New Context Ray
         contextRay = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawLine(cam.transform.position, cam.transform.position + interactDist * cam.transform.forward, Color.blue);
-        if (Physics.Raycast(contextRay, out RaycastHit hit, interactDist, layersToHit))
+        RaycastHit hit;
+        if (!paused && Physics.Raycast(contextRay, out hit, interactDist, layersToHit))
         {
             Debug.Log($"Looking at {hit.collider.gameObject.tag}");
         }
@@ -52,6 +55,14 @@ public class FPSControl : MonoBehaviour
         {
             paused = !paused;
             Time.timeScale = paused ? 0f : 1.0f;
+        }
+
+        if (Input.GetMouseButtonDown(0) && !paused)
+        {
+            if (hit.collider != null)
+            {
+                PlayerInfo.Attack(hit.collider.gameObject);
+            }
         }
     }
 }
