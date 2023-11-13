@@ -10,6 +10,8 @@ public class CharacterInfo : ScriptableObject
     public int nerve;
     public int max_nerve;
 
+    public bool dead = false;
+
     private List<Stat> stat_block = new List<Stat>();
 
     public Stat AddStat(string statName, float baseValue, bool rounding)
@@ -66,7 +68,7 @@ public class CharacterInfo : ScriptableObject
 
     private void Death()
     {
-        
+        dead = true;
     }
 
 }
