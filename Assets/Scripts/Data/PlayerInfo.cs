@@ -16,7 +16,8 @@ public class PlayerInfo : CharacterInfo
     {
         if (target.tag == "Enemy")
         {
-            //target.GetComponent<>
+            CharacterInfo enemy = target.GetComponent<Enemy>().character_info;
+            enemy.TakeDamage(10);
         }
     }
 }
