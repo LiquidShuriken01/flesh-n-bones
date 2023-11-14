@@ -24,6 +24,12 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         moving = pathing_ai.is_moving;
+        // Set animator bool "moving" to moving
+        animator.SetBool("isMoving", moving);
+        //Debug.Log(moving);
         dead = character_info.dead;
+        animator.SetBool("isDead", dead);
+        //Debug.Log(dead);
+        // Set animator bool "dead" to dead
     }
 }

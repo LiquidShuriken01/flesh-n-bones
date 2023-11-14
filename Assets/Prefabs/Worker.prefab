@@ -318,9 +318,9 @@ GameObject:
   - component: {fileID: 222464676186511297}
   - component: {fileID: 9016418528538233365}
   - component: {fileID: 6233807961616349603}
-  - component: {fileID: -4189777378315143685}
+  - component: {fileID: -8852751160027553567}
   m_Layer: 6
-  m_Name: Fish Face
+  m_Name: Worker
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,7 +335,7 @@ Transform:
   m_GameObject: {fileID: 6486425115149625265}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.97945714, y: 0.52, z: 1.7098918}
+  m_LocalPosition: {x: 0.97945714, y: 3, z: 1.7098918}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -483,7 +483,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1625936450, guid: 67aba552cda286b4bb5fcbdf6d9539c8, type: 3}
+  m_Sprite: {fileID: 198038806, guid: 8dc25a481fba8cc4182ca69d933f2e7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -504,7 +504,7 @@ Animator:
   m_GameObject: {fileID: 6486425115149625265}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 910cafebe85a1054e8976eb6f72380fb, type: 2}
+  m_Controller: {fileID: 9100000, guid: a19d329b2f3430a43a021859b2e5b1c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -515,7 +515,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-4189777378315143685
+--- !u!114 &-8852751160027553567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9676352e01c21d94ea8c97f775beee38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 0}
+  template: {fileID: 11400000, guid: b8660dbd03d3ef146b7419041bbfcc02, type: 2}
   animator: {fileID: 0}
 --- !u!1 &7698873978770652912
 GameObject:
