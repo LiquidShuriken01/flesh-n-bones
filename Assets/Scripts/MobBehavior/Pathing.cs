@@ -14,9 +14,9 @@ public class Pathing : MonoBehaviour
 
     [SerializeField] GameObject target;
     [SerializeField] Transform waypoints;
-    [SerializeField] bool persue;
+    [SerializeField] bool pursue;
     [NonSerialized] public bool is_moving;
-    [SerializeField] float persueDist = 5.0f;
+    [SerializeField] float pursueDist = 5.0f;
     
 
     //public LayerMask layersToHit;
@@ -39,6 +39,7 @@ public class Pathing : MonoBehaviour
     private void Start()
     {
         character_info = gameObject.GetComponent<Enemy>().character_info;
+        is_moving = false;
     }
 
     /*void OnDrawGizmos()
@@ -142,16 +143,17 @@ public class Pathing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        is_moving = (agent.speed > 0.01f);
-
         if (!character_info.dead)
         {
-            if (persue)
+            if (pursue)
             {
                 float distance = (this.transform.position - target.transform.position).magnitude;
-                if (distance <= persueDist) { Pursue(); }
+                if (distance <= pursueDist) { Pursue(); }
             }
             else { Evade(); }
         }
+
+        Debug.Log($"Current Speed is {agent.velocity.magnitude}");
+        is_moving = (agent.velocity.magnitude > 0.01f);
     }
 }

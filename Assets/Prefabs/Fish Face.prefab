@@ -283,8 +283,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   waypoints: {fileID: 0}
-  persue: 1
-  persueDist: 3
+  pursue: 1
+  pursueDist: 3
 --- !u!114 &5459792530057942982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +358,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.45
   m_Speed: 1.2
-  m_Acceleration: 3
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0.8
