@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb262fcc7b446d34b910e760cfeb347e, type: 3}
   m_Name: PlayerInfo_0
   m_EditorClassIdentifier: 
+  char_name: Player
   health: 10
+  max_health: 100
   nerve: 100
+  max_nerve: 100
+  dead: 0

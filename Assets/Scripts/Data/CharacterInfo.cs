@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class CharacterInfo : ScriptableObject
 {
-    public string name;
+    public string char_name;
     public int health;
     public int max_health;
     public int nerve;

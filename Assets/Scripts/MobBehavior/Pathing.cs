@@ -1,16 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Pathing : MonoBehaviour
 {
+    [NonSerialized]
+    public CharacterInfo character_info;
+
     private NavMeshAgent agent;
     private List<Vector3> path = new List<Vector3>();
 
     [SerializeField] GameObject target;
     [SerializeField] Transform waypoints;
     [SerializeField] bool persue;
+    [NonSerialized] public bool is_moving;
     [SerializeField] float persueDist = 5.0f;
     
 
@@ -29,6 +34,11 @@ public class Pathing : MonoBehaviour
             }
         }
 
+    }
+
+    private void Start()
+    {
+        character_info = gameObject.GetComponent<Enemy>().character_info;
     }
 
     /*void OnDrawGizmos()
@@ -70,7 +80,7 @@ public class Pathing : MonoBehaviour
             return;
         }
 
-        float lookAhead = targetDir.magnitude / agent.speed;
+        float lookAhead = 0.5f;
         Seek(target.transform.position + target.transform.forward * lookAhead);
     }
 
@@ -132,11 +142,16 @@ public class Pathing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (persue)
+        is_moving = (agent.speed < 0.01f);
+
+        if (!character_info.dead)
         {
-            float distance = (this.transform.position - target.transform.position).magnitude;
-            if (distance <= persueDist)  { Pursue(); }
+            if (persue)
+            {
+                float distance = (this.transform.position - target.transform.position).magnitude;
+                if (distance <= persueDist) { Pursue(); }
+            }
+            else { Evade(); }
         }
-        else  { Evade(); }
     }
 }

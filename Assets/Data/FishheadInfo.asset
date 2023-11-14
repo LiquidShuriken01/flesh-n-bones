@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7d0909cebc90e4982505be858b5220, type: 3}
-  m_Name: EnemyInfo
+  m_Name: FishheadInfo
   m_EditorClassIdentifier: 
-  name: 
-  health: 0
-  max_health: 0
+  char_name: Fishhead
+  health: 50
+  max_health: 50
   nerve: 0
   max_nerve: 0
   dead: 0

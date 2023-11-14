@@ -45,22 +45,19 @@ public class FPSControl : MonoBehaviour
         // Draw New Context Ray
         contextRay = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawLine(cam.transform.position, cam.transform.position + interactDist * cam.transform.forward, Color.blue);
-        GameObject hit_target = new GameObject();
         if (!paused && Physics.Raycast(contextRay, out RaycastHit hit, interactDist, layersToHit))
         {
             Debug.Log($"Looking at {hit.collider.gameObject.tag}");
-            hit_target = hit.collider.gameObject;
+            if (Input.GetMouseButtonDown(0) && !paused)
+            {
+                PlayerInfo.Attack(hit.collider.gameObject);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
             paused = !paused;
             Time.timeScale = paused ? 0f : 1.0f;
-        }
-
-        if (Input.GetMouseButtonDown(0) && !paused)
-        {
-            PlayerInfo.Attack(hit_target);
         }
     }
 }

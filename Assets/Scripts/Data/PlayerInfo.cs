@@ -9,7 +9,7 @@ public class PlayerInfo : CharacterInfo
 {
     void OnEnable()
     {
-        this.name = "Player";
+        this.char_name = "Player";
     }
 
     public void Attack(GameObject target)
