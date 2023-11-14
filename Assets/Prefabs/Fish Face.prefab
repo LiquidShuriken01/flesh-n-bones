@@ -160,7 +160,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5, y: 0.25}
-  m_SizeDelta: {x: 8, y: 0.5}
+  m_SizeDelta: {x: 6, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7878477835543852876
 CanvasRenderer:
@@ -228,17 +228,17 @@ RectTransform:
   m_GameObject: {fileID: 5220640328915534383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2606297600982161402}
   m_Father: {fileID: 8575738694473287636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!223 &8905184067791958877
 Canvas:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ Canvas:
   m_GameObject: {fileID: 5220640328915534383}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6540543430141858374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8575738694473287636}
+  - component: {fileID: 2041585086457374919}
   - component: {fileID: 2190226659913118947}
   - component: {fileID: 5459792530057942982}
   - component: {fileID: 2965251403057531575}
@@ -342,6 +343,21 @@ Transform:
   - {fileID: 1670022835288982196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2041585086457374919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6486425115149625265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9676352e01c21d94ea8c97f775beee38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  template: {fileID: 11400000, guid: 77d16b0003f984449b48e33a254b1160, type: 2}
+  health_bar: {fileID: 0}
+  animator: {fileID: 6233807961616349603}
 --- !u!114 &2190226659913118947
 MonoBehaviour:
   m_ObjectHideFlags: 0
