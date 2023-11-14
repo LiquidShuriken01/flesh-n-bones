@@ -2034,10 +2034,6 @@ PrefabInstance:
       propertyPath: waypoints
       value: 
       objectReference: {fileID: 402908390}
-    - target: {fileID: 2762446786317337472, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
-      propertyPath: m_Value
-      value: 99.7
-      objectReference: {fileID: 0}
     - target: {fileID: 6109853402359913713, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2088,10 +2084,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575738694473287636, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016418528538233365, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
-      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
