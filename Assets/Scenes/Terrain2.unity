@@ -1118,7 +1118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1760714182489039777, guid: b9f2b5601b6d5484fa1ced787d8e9203, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b9f2b5601b6d5484fa1ced787d8e9203, type: 3}
       propertyPath: m_Name
@@ -1258,6 +1258,7 @@ GameObject:
   - component: {fileID: 1987319377}
   - component: {fileID: 1987319376}
   - component: {fileID: 1987319375}
+  - component: {fileID: 1987319379}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1282,7 +1283,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1351,6 +1352,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1987319379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987319374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055e8222677b7db449d046f91afb0f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextScene: Terrain3
 --- !u!1 &2056404061 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2800250516343163423, guid: b9f2b5601b6d5484fa1ced787d8e9203, type: 3}
@@ -1438,7 +1452,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 204478278}
   - {fileID: 227487091}
+  - {fileID: 1987319378}
   - {fileID: 1048860874}
   - {fileID: 616789864}
   - {fileID: 1684171804}
-  - {fileID: 1987319378}
