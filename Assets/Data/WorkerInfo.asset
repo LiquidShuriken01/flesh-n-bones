@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WorkerInfo
   m_EditorClassIdentifier: 
   char_name: Worker
-  health: 30
+  health: 50
   max_health: 50
   nerve: 0
   max_nerve: 0

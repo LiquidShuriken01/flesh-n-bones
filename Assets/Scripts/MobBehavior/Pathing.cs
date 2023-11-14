@@ -142,7 +142,7 @@ public class Pathing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        is_moving = (agent.speed < 0.01f);
+        is_moving = (agent.speed > 0.01f);
 
         if (!character_info.dead)
         {

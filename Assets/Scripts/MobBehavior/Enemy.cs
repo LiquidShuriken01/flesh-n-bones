@@ -32,7 +32,8 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isMoving", moving);
         //Debug.Log(moving);
         dead = character_info.dead;
-        animator.SetBool("isDead", dead);
+        if (dead) { animator.SetTrigger("isDead"); }
+        
         //Debug.Log(dead);
         // Set animator bool "dead" to dead
 

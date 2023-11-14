@@ -14,6 +14,7 @@ public class Sprite : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        Vector3 reversed_target = 3 * transform.position - 2 * target.position;
+        transform.LookAt(reversed_target);
     }
 }
