@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     bool moving;
     [System.NonSerialized]
     bool dead;
+    public Animator animator;
 
     private Pathing pathing_ai;
 
