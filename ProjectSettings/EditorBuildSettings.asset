@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Terrain.unity
+    guid: 3dd0bd7d308e7a340b5bcd07331f5c88
+  - enabled: 1
+    path: Assets/Scenes/Terrain2.unity
+    guid: b5376c3858b12dc458fb5ee817c55948
+  - enabled: 1
+    path: Assets/Scenes/Terrain3.unity
+    guid: 28aa4cf39e8f2d149be4a4d2f450ea61
   m_configObjects: {}

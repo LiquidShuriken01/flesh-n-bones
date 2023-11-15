@@ -6,24 +6,51 @@ using UnityEngine.SceneManagement;
 public class SceneTransition : MonoBehaviour
 {
     public string NextScene;
+    public string tagEnemy = "Enemy";
+    public GameObject loader;
+    public bool enemiesPresent;
 
-    void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
+    void Start()
+    {
+        loader.SetActive(false);
+        int count = CountObjectsWithTag(tagEnemy);
+        Debug.Log("Total enemies " + count);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Entered");
+        if (other.CompareTag("Player"))
+        {
             SceneManager.LoadScene(NextScene);
         }
     }
-}
-    
-    // Start is called before the first frame update
-/*{
-    void Start()
+
+    int CountObjectsWithTag(string tag)
     {
-        
+        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag(tagEnemy);
+        if (totalEnemies.Length == 0)
+        {
+            enemiesPresent = false;
+        }
+        else
+        {
+            enemiesPresent = true;
+        }
+        return totalEnemies.Length;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        int countUpdate = CountObjectsWithTag(tagEnemy);
+        Debug.Log(countUpdate);
+        if (!enemiesPresent)
+        {
+            loader.SetActive(true);
+        }
+        else
+        {
+            loader.SetActive(false);
+        }
     }
-}*/
+}
