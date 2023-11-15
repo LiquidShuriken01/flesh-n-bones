@@ -370,9 +370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  waypoints: {fileID: 0}
-  persue: 1
-  persueDist: 3
+  pursue: 0
+  pursueDist: 5
 --- !u!114 &5459792530057942982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,7 +453,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.8
-  m_BaseOffset: 0.35
+  m_BaseOffset: 0.65
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!212 &9016418528538233365

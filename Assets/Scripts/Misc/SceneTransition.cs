@@ -5,7 +5,55 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    public string NextScene;
+    public string nextScene;
+    public string enemyTag = "Enemy";
+    public GameObject loader;
+    public bool enemiesPresent;
+
+    void Start()
+    {
+        loader.SetActive(false);
+        CheckEnemies();
+    }
+
+    void Update()
+    {
+        CheckEnemies();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            LoadNextScene();
+        }
+    }
+
+    void LoadNextScene()
+    {
+        SceneManager.LoadScene(nextScene);
+    }
+
+    void CheckEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        enemiesPresent = false;
+
+        foreach (GameObject enemy in enemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+
+            if (enemyScript != null && !enemyScript.dead)
+            {
+                enemiesPresent = true;
+                break;
+            }
+        }
+
+        loader.SetActive(!enemiesPresent);
+    }
+    
+    /*public string NextScene;
     public string tagEnemy = "Enemy";
     public GameObject loader;
     public bool enemiesPresent;
@@ -52,5 +100,5 @@ public class SceneTransition : MonoBehaviour
         {
             loader.SetActive(false);
         }
-    }
+    }*/
 }

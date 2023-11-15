@@ -9,9 +9,9 @@ public class Enemy : MonoBehaviour
     [System.NonSerialized]
     public CharacterInfo character_info;
     [System.NonSerialized]
-    bool moving;
+    public bool moving;
     [System.NonSerialized]
-    bool dead;
+    public bool dead;
     public GameObject health_bar;
     Slider hp_slider;
     public Animator animator;
