@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/IntroSlides.unity
+    guid: e76ff1162ef6e5f4bb00c22405488c38
+  - enabled: 1
     path: Assets/Scenes/Terrain.unity
     guid: 3dd0bd7d308e7a340b5bcd07331f5c88
   - enabled: 1
