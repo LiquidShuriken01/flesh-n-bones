@@ -371,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   pursue: 0
-  pursueDist: 5
+  pursueDist: 10
 --- !u!114 &5459792530057942982
 MonoBehaviour:
   m_ObjectHideFlags: 0
