@@ -17,7 +17,8 @@ public class Pathing : MonoBehaviour
     [SerializeField] bool pursue;
     [NonSerialized] public bool is_moving;
     [SerializeField] float pursueDist = 5.0f;
-    
+    [NonSerialized] public float distance;
+    [NonSerialized] public bool attacking;
 
     //public LayerMask layersToHit;
 
@@ -40,6 +41,7 @@ public class Pathing : MonoBehaviour
     {
         character_info = gameObject.GetComponent<Enemy>().character_info;
         is_moving = false;
+        attacking = false;
     }
 
     /*void OnDrawGizmos()
@@ -143,11 +145,11 @@ public class Pathing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!character_info.dead)
+        if (!character_info.dead && !attacking)
         {
             if (pursue)
             {
-                float distance = (this.transform.position - target.transform.position).magnitude;
+                distance = (this.transform.position - target.transform.position).magnitude;
                 if (distance <= pursueDist) { Pursue(); }
             }
             else { Evade(); }

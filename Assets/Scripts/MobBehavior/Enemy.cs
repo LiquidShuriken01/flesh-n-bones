@@ -33,11 +33,21 @@ public class Enemy : MonoBehaviour
         //Debug.Log(moving);
         dead = character_info.dead;
         if (dead) { animator.SetTrigger("isDead"); }
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fish_Attack") && pathing_ai.distance <= 0.9f)
+        {
+            pathing_ai.attacking = true;
+            animator.SetTrigger("attack");
+        }
+        else
+        {
+            pathing_ai.attacking = false;
+        }
         
         //Debug.Log(dead);
         // Set animator bool "dead" to dead
 
         hp_slider.maxValue = character_info.max_health;
         hp_slider.value = character_info.health;
+
     }
 }
