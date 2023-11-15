@@ -13,7 +13,7 @@ public class Pathing : MonoBehaviour
     private List<Vector3> path = new List<Vector3>();
 
     [SerializeField] GameObject target;
-    [SerializeField] Transform waypoints;
+    //[SerializeField] Transform waypoints;
     [SerializeField] bool pursue;
     [NonSerialized] public bool is_moving;
     [SerializeField] float pursueDist = 5.0f;
@@ -26,14 +26,14 @@ public class Pathing : MonoBehaviour
     {
         agent = this.GetComponent<NavMeshAgent>();
         path.Clear();
-        if (waypoints.childCount > 0)
+        /*if (waypoints.childCount > 0)
         {
             foreach (Transform waypoint in waypoints)
             {
                 path.Add(waypoint.position);
             }
         }
-
+        */
     }
 
     private void Start()
@@ -112,7 +112,7 @@ public class Pathing : MonoBehaviour
         Seek(targetWorld);
     }
 
-    void FollowPath(List<Vector3> path)
+    /*void FollowPath(List<Vector3> path)
     {
         int index = 0;
         int closest = 0;
@@ -138,7 +138,7 @@ public class Pathing : MonoBehaviour
             Seek(path[0]);
         }
             
-    }
+    }*/
 
     // Update is called once per frame
     void FixedUpdate()
