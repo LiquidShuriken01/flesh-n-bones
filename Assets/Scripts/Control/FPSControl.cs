@@ -25,6 +25,7 @@ public class FPSControl : MonoBehaviour
     void Start()
     {
         cam = transform.GetChild(0).gameObject;
+        PlayerInfo.gm = GameObject.FindWithTag("Ruleset").GetComponent<GameMaster>();
     }
 
     // Update is called once per frame
@@ -50,7 +51,7 @@ public class FPSControl : MonoBehaviour
             Debug.Log($"Looking at {hit.collider.gameObject.tag}");
             if (Input.GetMouseButtonDown(0) && !paused)
             {
-                PlayerInfo.Attack(hit.collider.gameObject);
+                PlayerInfo.Interact(hit.collider.gameObject);
             }
         }
 

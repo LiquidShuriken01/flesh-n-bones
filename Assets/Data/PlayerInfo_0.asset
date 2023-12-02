@@ -18,3 +18,5 @@ MonoBehaviour:
   nerve: 100
   max_nerve: 100
   dead: 0
+  stat_block: []
+  gm: {fileID: 0}

@@ -10,6 +10,22 @@ public enum ModType
     Flat,
     Percentile
 }
+
+public enum AtkType
+{
+    Carapace,
+    Mucus,
+    Ectoplasm
+}
+
+/* TODO:
+ *      Implement a Damage class that contains a list of damages by types.
+ *      Some functions ideas are: ToString() for log purposes, ApplyResistances() reduce each damage according to
+ *      target's resistances.
+ *      TakeDamage() will be modified to take in Damage as param.
+ */
+
+[System.Serializable]
 public class Modifier
 {
     public float value { get; private set; }
@@ -112,7 +128,7 @@ public class Stat
     /* progresses time for each Modifier affecting .this Stat
      * call this in Update() of PlayerInfo for each Stat in its list
      */
-    public void ModifierTick()
+    public void ModifiersTick()
     {
         List<string> srcToRemove = new List<string>();
         List<Modifier> modToRemove = new List<Modifier>();

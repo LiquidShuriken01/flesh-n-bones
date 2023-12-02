@@ -6,20 +6,24 @@ using UnityEngine.AI;
 
 public class Pathing : MonoBehaviour
 {
-    [NonSerialized]
-    public CharacterInfo character_info;
+    [SerializeField] private GameObject target;
+    [SerializeField] private float detectDist = 7.5f;
+    [SerializeField] private float pursueDist = 5.0f;
+    [SerializeField] private float evadeDist = 0f;
+    
+    [NonSerialized] public bool is_moving;
+    [NonSerialized] public bool can_attack;
+    [NonSerialized] public bool attacking;
+
+    private bool pursue;
+    private float distance;
+
+    private CharacterInfo character_info;
 
     private NavMeshAgent agent;
     private List<Vector3> path = new List<Vector3>();
 
-    [SerializeField] GameObject target;
     //[SerializeField] Transform waypoints;
-    [SerializeField] bool pursue;
-    [NonSerialized] public bool is_moving;
-    [SerializeField] float pursueDist = 5.0f;
-    [NonSerialized] public float distance;
-    [NonSerialized] public bool attacking;
-
     //public LayerMask layersToHit;
 
     // Start is called before the first frame update
@@ -27,6 +31,7 @@ public class Pathing : MonoBehaviour
     {
         agent = this.GetComponent<NavMeshAgent>();
         path.Clear();
+        pursue = true;
         /*if (waypoints.childCount > 0)
         {
             foreach (Transform waypoint in waypoints)
@@ -40,7 +45,10 @@ public class Pathing : MonoBehaviour
     private void Start()
     {
         character_info = gameObject.GetComponent<Enemy>().character_info;
+
+        pursue = true;
         is_moving = false;
+        can_attack = false;
         attacking = false;
     }
 
@@ -60,29 +68,20 @@ public class Pathing : MonoBehaviour
 
     void Seek(Vector3 location)
     {
+        agent.isStopped = false;
         agent.SetDestination(location);
     }
 
     void Flee(Vector3 location)
     {
+        agent.isStopped = false;
         Vector3 fleeVector = location - this.transform.position;
-        agent.SetDestination(this.transform.position - fleeVector);
+        agent.SetDestination(this.transform.position - fleeVector.normalized);
     }
 
     void Pursue()
     {
         Vector3 targetDir = target.transform.position - this.transform.position;
-
-        float relativeHeading = Vector3.Angle(this.transform.forward, this.transform.TransformVector(target.transform.forward));
-
-        float toTarget = Vector3.Angle(this.transform.forward, this.transform.TransformVector(targetDir));
-
-        if ((toTarget > 90 && relativeHeading < 20))
-        {
-            Seek(target.transform.position);
-            return;
-        }
-
         float lookAhead = 0.5f;
         Seek(target.transform.position + target.transform.forward * lookAhead);
     }
@@ -90,14 +89,15 @@ public class Pathing : MonoBehaviour
     void Evade()
     {
         Vector3 targetDir = target.transform.position - this.transform.position;
-        float lookAhead = targetDir.magnitude / agent.speed;
-        Flee(target.transform.position + target.transform.forward * lookAhead);
+        float lookAhead = 0.5f;
+        Flee(target.transform.position + targetDir * lookAhead);
     }
 
 
     Vector3 wanderTarget = Vector3.zero;
     void Wander()
     {
+        agent.isStopped = false;
         float wanderRadius = 10;
         float wanderDistance = 10;
         float wanderJitter = 1;
@@ -142,20 +142,40 @@ public class Pathing : MonoBehaviour
             
     }*/
 
+    private void Stop()
+    {
+        agent.isStopped = true;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         if (!character_info.dead && !attacking)
         {
+            distance = (this.transform.position - target.transform.position).magnitude;
+            if (distance > pursueDist) { pursue = true; }
+            if (distance <= evadeDist) { pursue = false; }
             if (pursue)
             {
-                distance = (this.transform.position - target.transform.position).magnitude;
-                if (distance <= pursueDist) { Pursue(); }
+                if (distance <= detectDist && distance > pursueDist + 0.5f)
+                {
+                    Pursue();
+                }
+                //else { Stop(); }
             }
-            else { Evade(); }
-        }
+            else
+            {
+                if (distance < evadeDist - 0.5f)
+                {
+                    Evade();
+                }
+                else { Stop(); }
+            }
 
-        Debug.Log($"Current Speed is {agent.velocity.magnitude}");
+            can_attack = (distance <= pursueDist) && (distance > evadeDist);
+        }
+        else { can_attack = false; }
+
         is_moving = (agent.velocity.magnitude > 0.01f);
     }
 }

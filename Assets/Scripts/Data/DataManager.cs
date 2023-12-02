@@ -8,6 +8,10 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+    public PlayerInfo player_info;
+    public CharacterInfo fishhead_info;
+    public CharacterInfo worker_info;
+    public CharacterInfo cancer_info;
 
     [System.Serializable]
     private class SkillList
@@ -39,8 +43,10 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            LoadSkills();
-            LoadOrgans();
+            //LoadSkills();
+            //LoadOrgans();
+            LoadPlayerInfo();
+            LoadMobInfo();
             _instance = this;
         }
 
@@ -54,7 +60,7 @@ public class DataManager : MonoBehaviour
     {
         Debug.Log("Loading skill data...");
 
-        string path = $"{Application.dataPath}/Data/skills.xml";
+        string path = $"{Application.dataPath}/Data/skills.json";
         string json = File.ReadAllText(path);
         SkillList skillList = JsonUtility.FromJson<SkillList>(json);
         skill_list = skillList._list;
@@ -81,5 +87,24 @@ public class DataManager : MonoBehaviour
         }
         */
         Debug.Log($"... success! {count} organs loaded");
+    }
+
+    private void LoadPlayerInfo()
+    {
+        player_info.AddStat("max_health", 100f, false);
+        player_info.AddStat("max_nerve", 20f, false);
+        player_info.AddStat("base_atk_bonus", 5f, true);
+        player_info.AddStat("carapace", 50f, true);
+        player_info.AddStat("mucus", 50f, true);
+        player_info.AddStat("ectoplasm", 50f, true);
+    }
+
+    private void LoadMobInfo()
+    {
+        fishhead_info.AddStat("max_health", 50f, false);
+        fishhead_info.AddStat("base_atk_bonus", 5f, true);
+        fishhead_info.AddStat("carapace", 30f, true);
+        fishhead_info.AddStat("mucus", 30f, true);
+        fishhead_info.AddStat("ectoplasm", 30f, true);
     }
 }

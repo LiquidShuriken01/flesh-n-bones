@@ -7,14 +7,18 @@ using UnityEngine;
 public class CharacterInfo : ScriptableObject
 {
     public string char_name;
-    public int health;
-    public int max_health;
-    public int nerve;
-    public int max_nerve;
+    public float health;
+    public float max_health;
+    public float nerve;
+    public float max_nerve;
 
     public bool dead = false;
 
+    // These info will be loaded from external files in the future
+    [SerializeField]
     private List<Stat> stat_block = new List<Stat>();
+
+    public GameMaster gm;
 
     public Stat AddStat(string statName, float baseValue, bool rounding)
     {
@@ -22,6 +26,12 @@ public class CharacterInfo : ScriptableObject
         stat_block.Add(new_stat);
         return new_stat;
     }
+
+    public void ClearStats()
+    {
+        stat_block.Clear();
+    }
+
     public float GetStatValue(string statName)
     {
         foreach (Stat stat in stat_block)
@@ -29,6 +39,18 @@ public class CharacterInfo : ScriptableObject
             if (stat.IsStatName(statName))
             {
                 return stat.total_value;
+            }
+        }
+        return 0;
+    }
+
+    public int GetStatValueInt(string statName)
+    {
+        foreach (Stat stat in stat_block)
+        {
+            if (stat.IsStatName(statName))
+            {
+                return Mathf.RoundToInt(stat.total_value);
             }
         }
         return 0;
@@ -50,6 +72,11 @@ public class CharacterInfo : ScriptableObject
         bool rounding = (modType == ModType.Flat) ? true : false;
         Stat new_stat = AddStat(statName, 0f, rounding);
         new_stat.AddModifier(source, new_mod);
+    }
+
+    public void Attack(GameObject target, int acc, float damage, AtkType atkType)
+    {
+        gm.AttackRoll(target, this.char_name, acc, damage, atkType);
     }
 
     public void TakeDamage(int dmg)

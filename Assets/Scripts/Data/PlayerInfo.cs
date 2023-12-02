@@ -10,14 +10,15 @@ public class PlayerInfo : CharacterInfo
     void OnEnable()
     {
         this.char_name = "Player";
+        this.health = this.max_health = this.GetStatValue("max_health");
+        this.nerve = this.max_nerve = this.GetStatValue("max_nerve");
     }
 
-    public void Attack(GameObject target)
+    public void Interact(GameObject target)
     {
         if (target.tag == "Enemy")
         {
-            CharacterInfo enemy = target.GetComponent<Enemy>().character_info;
-            enemy.TakeDamage(10);
+            this.Attack(target, this.GetStatValueInt("base_atk_bonus"), 10, AtkType.Carapace);
         }
     }
 }
