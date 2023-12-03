@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class FPSControl : MonoBehaviour
 {
-    public PlayerInfo PlayerInfo;
+    public PlayerInfo player_info;
 
     public float turnSpeed = 4.0f;
     public float moveSpeed = 2.0f;
@@ -25,7 +25,7 @@ public class FPSControl : MonoBehaviour
     void Start()
     {
         cam = transform.GetChild(0).gameObject;
-        PlayerInfo.gm = GameObject.FindWithTag("Ruleset").GetComponent<GameMaster>();
+        player_info.gm = GameObject.FindWithTag("Ruleset").GetComponent<GameMaster>();
     }
 
     // Update is called once per frame
@@ -38,10 +38,12 @@ public class FPSControl : MonoBehaviour
         cam.transform.eulerAngles = new Vector3(new_x, new_y, 0);
 
         // Move Character
-        Vector3 dir = new Vector3(0, 0, 0);
-        dir.x = Input.GetAxis("Horizontal");
-        dir.z = Input.GetAxis("Vertical");
-        transform.Translate(dir * moveSpeed * Time.deltaTime);
+        Vector3 dir = new Vector3(0, 0, 0)
+        {
+            x = Input.GetAxis("Horizontal"),
+            z = Input.GetAxis("Vertical")
+        };
+        transform.Translate(moveSpeed * Time.deltaTime * dir);
 
         // Draw New Context Ray
         contextRay = new Ray(cam.transform.position, cam.transform.forward);
@@ -51,7 +53,7 @@ public class FPSControl : MonoBehaviour
             Debug.Log($"Looking at {hit.collider.gameObject.tag}");
             if (Input.GetMouseButtonDown(0) && !paused)
             {
-                PlayerInfo.Interact(hit.collider.gameObject);
+                player_info.Interact(hit.collider.gameObject);
             }
         }
 

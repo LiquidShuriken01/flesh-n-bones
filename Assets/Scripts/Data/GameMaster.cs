@@ -27,9 +27,8 @@ public class GameMaster : MonoBehaviour
         else { return 3; }
     }
 
-    public void AttackRoll(GameObject target, string name, int acc, float damage, AtkType atkType)
+    public void AttackRoll(CharacterInfo target, string name, int acc, float damage, AtkType atkType)
     {
-        CharacterInfo enemy = target.GetComponent<Enemy>().character_info;
         int dmg;
         string target_stat = "";
         if (atkType == AtkType.Carapace)
@@ -45,25 +44,25 @@ public class GameMaster : MonoBehaviour
             target_stat = "ectoplasm";
         }
         
-        switch (Roll((int)enemy.GetStatValue(target_stat), acc))
+        switch (Roll((int)target.GetStatValue(target_stat), acc))
         {
             case 0:
                 Debug.Log("Miss...");
                 break;
             case 1:
                 dmg = Mathf.RoundToInt(damage * 0.5f);
-                Debug.Log($"Grazing Hit. {name} deals {dmg} damage to {enemy.name}.");
-                enemy.TakeDamage(dmg);
+                Debug.Log($"Grazing Hit. {name} deals {dmg} damage to {target.name}.");
+                target.TakeDamage(dmg);
                 break;
             case 2:
                 dmg = Mathf.RoundToInt(damage);
-                Debug.Log($"Hit. {name} deals {dmg} damage to {enemy.name}.");
-                enemy.TakeDamage(dmg);
+                Debug.Log($"Hit. {name} deals {dmg} damage to {target.name}.");
+                target.TakeDamage(dmg);
                 break;
             case 3:
                 dmg = Mathf.RoundToInt(damage * 1.5f);
-                Debug.Log($"Critical Hit! {name} deals {dmg} damage to {enemy.name}.");
-                enemy.TakeDamage(dmg);
+                Debug.Log($"Critical Hit! {name} deals {dmg} damage to {target.name}.");
+                target.TakeDamage(dmg);
                 break;
             default: break;
         }

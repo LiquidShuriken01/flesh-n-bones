@@ -16,9 +16,10 @@ public class PlayerInfo : CharacterInfo
 
     public void Interact(GameObject target)
     {
-        if (target.tag == "Enemy")
+        if (target.CompareTag("Enemy"))
         {
-            this.Attack(target, this.GetStatValueInt("base_atk_bonus"), 10, AtkType.Carapace);
+            CharacterInfo enemy_info = target.GetComponent<Enemy>().character_info;
+            this.gm.AttackRoll(enemy_info, this.char_name, this.GetStatValueInt("base_atk_bonus"), 10, AtkType.Carapace);
         }
     }
 }

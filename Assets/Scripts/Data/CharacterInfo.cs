@@ -24,6 +24,8 @@ public class CharacterInfo : ScriptableObject
     {
         Stat new_stat = new Stat(statName, baseValue, rounding);
         stat_block.Add(new_stat);
+        if (statName == "max_health") { max_health = baseValue; }
+        if (statName == "max_nerve") { max_nerve = baseValue; }
         return new_stat;
     }
 
@@ -56,6 +58,12 @@ public class CharacterInfo : ScriptableObject
         return 0;
     }
 
+    public void RestoreStatus()
+    {
+        health = max_health;
+        nerve = max_nerve;
+    }
+
     public void BuffStat(string statName, float value, float duration, ModType modType, string source)
     {
         Modifier new_mod = new Modifier(value, duration, modType);
@@ -65,6 +73,14 @@ public class CharacterInfo : ScriptableObject
             if (stat.IsStatName(statName))
             {
                 stat.AddModifier(source, new_mod);
+                if (statName == "max_health")
+                {
+                    max_health = stat.total_value;
+                }
+                if (statName == "max_nerve")
+                {
+                    max_nerve = stat.total_value;
+                }
                 return;
             }
         }
@@ -72,11 +88,6 @@ public class CharacterInfo : ScriptableObject
         bool rounding = (modType == ModType.Flat) ? true : false;
         Stat new_stat = AddStat(statName, 0f, rounding);
         new_stat.AddModifier(source, new_mod);
-    }
-
-    public void Attack(GameObject target, int acc, float damage, AtkType atkType)
-    {
-        gm.AttackRoll(target, this.char_name, acc, damage, atkType);
     }
 
     public void TakeDamage(int dmg)
