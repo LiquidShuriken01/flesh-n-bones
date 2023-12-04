@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   detectDist: 6
-  pursueDist: 0.75
+  pursueDist: 1.5
   evadeDist: 0
 --- !u!114 &5459792530057942982
 MonoBehaviour:
