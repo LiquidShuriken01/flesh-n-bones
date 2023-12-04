@@ -62,5 +62,13 @@ public class FPSControl : MonoBehaviour
             paused = !paused;
             Time.timeScale = paused ? 0f : 1.0f;
         }
+
+        /*if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log(player_info.GetStatValueInt("base_atk_bonus"));
+            Debug.Log(player_info.GetStatValueInt("carapace"));
+            Debug.Log(player_info.GetStatValueInt("mucus"));
+            Debug.Log(player_info.GetStatValueInt("ectoplasm"));
+        }*/
     }
 }

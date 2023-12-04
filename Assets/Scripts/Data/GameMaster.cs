@@ -21,6 +21,7 @@ public class GameMaster : MonoBehaviour
     private int Roll(int threshold, int modifier)
     {
         int result = Random.Range(1, 100) + modifier;
+        Debug.Log($"Rolled {result} vs. {threshold}");
         if (result < threshold - 25) { return 0; }
         else if (result < threshold) { return 1; }
         else if (result < threshold + 50) { return 2; }
@@ -44,10 +45,10 @@ public class GameMaster : MonoBehaviour
             target_stat = "ectoplasm";
         }
         
-        switch (Roll((int)target.GetStatValue(target_stat), acc))
+        switch (Roll(target.GetStatValueInt(target_stat), acc))
         {
             case 0:
-                Debug.Log("Miss...");
+                Debug.Log($"Miss...");
                 break;
             case 1:
                 dmg = Mathf.RoundToInt(damage * 0.5f);

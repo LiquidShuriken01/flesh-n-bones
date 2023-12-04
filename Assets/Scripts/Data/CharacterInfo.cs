@@ -16,7 +16,7 @@ public class CharacterInfo : ScriptableObject
 
     // These info will be loaded from external files in the future
     [SerializeField]
-    private List<Stat> stat_block = new List<Stat>();
+    private List<Stat> stat_block = new();
 
     public GameMaster gm;
 
@@ -60,6 +60,7 @@ public class CharacterInfo : ScriptableObject
 
     public void RestoreStatus()
     {
+        dead = false;
         health = max_health;
         nerve = max_nerve;
     }
@@ -85,7 +86,7 @@ public class CharacterInfo : ScriptableObject
             }
         }
 
-        bool rounding = (modType == ModType.Flat) ? true : false;
+        bool rounding = (modType == ModType.Flat);
         Stat new_stat = AddStat(statName, 0f, rounding);
         new_stat.AddModifier(source, new_mod);
     }

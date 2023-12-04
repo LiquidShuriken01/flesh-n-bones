@@ -172,9 +172,13 @@ public class Pathing : MonoBehaviour
                 else { Stop(); }
             }
 
-            can_attack = (distance <= pursueDist) && (distance > evadeDist);
+            can_attack = (distance <= pursueDist) && (distance > evadeDist) && !character_info.dead;
         }
-        else { can_attack = false; }
+        else 
+        {
+            can_attack = false;
+            Stop();
+        }
 
         is_moving = (agent.velocity.magnitude > 0.01f);
     }

@@ -6,19 +6,24 @@ public class LungfishBehavior : MonoBehaviour
 {
     public Animator animator;
     public GameObject phlegm_glob;
-    [System.NonSerialized] public CharacterInfo character_info;
-
+    
+    private CharacterInfo character_info;
     private Pathing pathing_ai;
 
     private void Start()
     {
         pathing_ai = gameObject.GetComponent<Pathing>();
+        character_info = gameObject.GetComponent<Enemy>().character_info;
     }
 
     private void Update()
     {
         animator.SetBool("isMoving", pathing_ai.is_moving);
-        if (character_info.dead) { animator.SetTrigger("isDead"); }
+        if (character_info.dead)
+        {
+            animator.ResetTrigger("attack");
+            animator.SetTrigger("isDead");
+        }
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fish_Attack") && pathing_ai.can_attack)
         {
             pathing_ai.attacking = true;
@@ -26,6 +31,7 @@ public class LungfishBehavior : MonoBehaviour
         }
         else
         {
+            animator.ResetTrigger("attack");
             pathing_ai.attacking = false;
         }
     }

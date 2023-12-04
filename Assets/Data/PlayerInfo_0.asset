@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerInfo_0
   m_EditorClassIdentifier: 
   char_name: Player
-  health: 10
+  health: 100
   max_health: 100
-  nerve: 100
-  max_nerve: 100
+  nerve: 20
+  max_nerve: 20
   dead: 0
   stat_block: []
   gm: {fileID: 0}

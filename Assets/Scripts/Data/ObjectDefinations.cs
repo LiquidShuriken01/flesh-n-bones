@@ -61,6 +61,7 @@ public class Stat
             {
                 value = CalculateValue();    
             }
+
             return value;
         }
 
@@ -76,6 +77,7 @@ public class Stat
     {
         this.name = n;
         this.base_value = baseValue;
+        this.value = baseValue;
         this.rounding = rounding;
         this.modifiers = new Dictionary<string,Modifier>();
     }
@@ -122,7 +124,7 @@ public class Stat
 
     public bool IsStatName(string statName)
     {
-        return (statName == name);
+        return (statName.Equals(name));
     }
 
     /* progresses time for each Modifier affecting .this Stat
