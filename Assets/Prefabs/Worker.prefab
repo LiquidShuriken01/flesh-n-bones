@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   detectDist: 6
-  pursueDist: 1.5
+  pursueDist: 4
   evadeDist: 0
 --- !u!114 &5459792530057942982
 MonoBehaviour:
@@ -461,7 +461,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.45
-  m_Speed: 1.2
+  m_Speed: 4
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 180

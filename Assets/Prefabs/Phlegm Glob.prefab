@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b2ae64506f5814a8a8468ac278667b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 5614547546867349727, guid: d2e8c621f59be904291176ea6d7e6250, type: 3}
   origin_name: fishface420
   accuracy: 0
   damage: 0

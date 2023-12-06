@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,4 +23,9 @@ public class PlayerInfo : CharacterInfo
             this.gm.AttackRoll(enemy_info, this.char_name, this.GetStatValueInt("base_atk_bonus"), 10, AtkType.Carapace);
         }
     }
+
+    //void Update() {
+        //Debug.Log(this.GetStatValue("Health"));
+        //if (this.GetStatValue("Health") == 0):
+     //}
 }

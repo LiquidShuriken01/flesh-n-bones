@@ -5,6 +5,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataManager : MonoBehaviour
 {
@@ -110,5 +111,13 @@ public class DataManager : MonoBehaviour
         fishhead_info.AddStat("mucus", 30f, true);
         fishhead_info.AddStat("ectoplasm", 30f, true);
         fishhead_info.RestoreStatus();
+    }
+
+    void Update()
+    {
+        if (player_info.health <= 0)
+        {
+            SceneManager.LoadScene("IntroSlides");
+        }
     }
 }
