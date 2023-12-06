@@ -2444,7 +2444,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6b8441cc455923f47a565d7b6fb05316, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b6c6b9f87e56ecb4a9c4ae3603b3c602, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3658,6 +3658,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5516757803449271293, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634497216960382407, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: de58cafd8366eda4fa439ef7c9f8f06a, type: 2}
+    - target: {fileID: 5634497216960382407, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5120025755864803030, guid: de58cafd8366eda4fa439ef7c9f8f06a, type: 2}
+    - target: {fileID: 5634497216960382407, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5722988644453983331, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
