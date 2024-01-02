@@ -67,9 +67,9 @@ public class Stat
 
         private set { }
     }
-    private string name;
+    private readonly string name;
     private bool is_dirty = false;
-    private bool rounding;
+    private readonly bool rounding;
     private float value;
     private Dictionary<string, Modifier> modifiers;
     
@@ -166,7 +166,7 @@ public class Organ
 {
     public uint id;
     public string name;
-    private string buff_json;
+    private readonly string buff_json;
     private Dictionary<string, int> modifiers = new Dictionary<string, int>();
 
     public void LoadModifiers()

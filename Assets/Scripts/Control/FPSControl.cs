@@ -25,7 +25,7 @@ public class FPSControl : MonoBehaviour
     void Start()
     {
         cam = transform.GetChild(0).gameObject;
-        player_info.gm = GameObject.FindWithTag("Ruleset").GetComponent<GameMaster>();
+        player_info.gm = GameMaster._instance;
     }
 
     // Update is called once per frame

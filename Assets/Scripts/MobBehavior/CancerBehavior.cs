@@ -16,7 +16,7 @@ public class CancerBehavior : MonoBehaviour
     {
         pathing_ai = gameObject.GetComponent<Pathing>();
         character_info = gameObject.GetComponent<Enemy>().character_info;
-        gm = GameObject.FindGameObjectWithTag("Ruleset").GetComponent<GameMaster>();
+        gm = GameMaster._instance;
     }
 
     private void Update()

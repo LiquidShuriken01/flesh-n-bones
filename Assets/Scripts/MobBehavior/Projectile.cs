@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        gm = GameObject.FindGameObjectWithTag("Ruleset").GetComponent<GameMaster>();
+        gm = GameMaster._instance;
         rb = GetComponent<Rigidbody>();
 
         Vector3 dir = target.position - transform.position;
