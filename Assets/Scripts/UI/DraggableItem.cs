@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,6 +9,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     [HideInInspector]
     public Transform endParent;
+    public uint item_id = 0;
+    public int organ_session_id = -1;
+    public Organ this_organ = null;
+
+    void Start()
+    {
+        DataManager dm = DataManager._instance;
+        this_organ = new Organ(dm.organ_list[(int)item_id]);
+        organ_session_id = ++dm.organs_in_session;
+        this_organ.name += organ_session_id.ToSafeString();
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -16,6 +28,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         gameObject.GetComponent<Image>().raycastTarget = false;
+        endParent.GetComponent<ItemSlot>().has_item = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -30,5 +43,4 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         gameObject.GetComponent<Image>().raycastTarget = true;
     }
 
-    /* TODO: Create variable 'itemNo' that functions as a reference to a table of items. */
 }

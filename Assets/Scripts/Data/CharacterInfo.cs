@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 
 
@@ -11,6 +12,7 @@ public class CharacterInfo : ScriptableObject
     public float max_health;
     public float nerve;
     public float max_nerve;
+    public AtkType atk_type;
 
     public bool dead = false;
 
@@ -65,15 +67,13 @@ public class CharacterInfo : ScriptableObject
         nerve = max_nerve;
     }
 
-    public void BuffStat(string statName, float value, float duration, ModType modType, string source)
+    public void BuffStat(string statName, Modifier mod, string source)
     {
-        Modifier new_mod = new Modifier(value, duration, modType);
-
         foreach (Stat stat in stat_block)
         {
             if (stat.IsStatName(statName))
             {
-                stat.AddModifier(source, new_mod);
+                stat.AddModifier(source, mod);
                 if (statName == "max_health")
                 {
                     max_health = stat.total_value;
@@ -86,9 +86,24 @@ public class CharacterInfo : ScriptableObject
             }
         }
 
-        bool rounding = (modType == ModType.Flat);
+        bool rounding = (mod.mod_type == ModType.Flat);
         Stat new_stat = AddStat(statName, 0f, rounding);
-        new_stat.AddModifier(source, new_mod);
+        new_stat.AddModifier(source, mod);
+    }
+
+    public void BuffStat(string statName, float value, float duration, ModType modType, string source)
+    {
+        Modifier new_mod = new Modifier(value, duration, modType);
+
+        BuffStat(statName, new_mod, source);
+    }
+
+    public void RemoveBuff(string source) 
+    {
+        foreach(Stat stat in stat_block)
+        {
+            stat.RemoveModifier(source);
+        }
     }
 
     public void TakeDamage(int dmg)

@@ -33,8 +33,9 @@ public class DataManager : MonoBehaviour
     [SerializeField]
     private List<string> loading_list_organs;
     */
-    private List<Skill> skill_list = new List<Skill>();
-    private List<Organ> organ_list = new List<Organ>();
+    public int organs_in_session = 0;
+    public List<Skill> skill_list = new List<Skill>();
+    public List<Organ> organ_list = new List<Organ>();
 
     private void Awake()
     {
@@ -87,6 +88,9 @@ public class DataManager : MonoBehaviour
             count++;
         }
         */
+        organ_list.Add(new Organ(0, "muscle"));
+        organ_list.Add(new Organ(1, "chitin_gland"));
+        organ_list.Add(new Organ(2, "fat"));
         Debug.Log($"... success! {count} organs loaded");
     }
 

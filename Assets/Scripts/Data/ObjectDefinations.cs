@@ -18,6 +18,13 @@ public enum AtkType
     Ectoplasm
 }
 
+public enum EffectType
+{
+    DamageOverTime,
+    Buff,
+    Debuff
+}
+
 /* TODO:
  *      Implement a Damage class that contains a list of damages by types.
  *      Some functions ideas are: ToString() for log purposes, ApplyResistances() reduce each damage according to
@@ -38,13 +45,18 @@ public class Modifier
         this.duration = duration;
         this.mod_type = modType;
     }
-    
+
+    public override string ToString()
+    {
+        return ((value > 0) ? "+" : "") + value.ToString() + ((mod_type == ModType.Percentile) ? "%" : "");
+    }
+
     public bool Tick()
     {
         if (this.duration > 0)
         {
             duration -= Time.deltaTime;
-            if (duration < 0) { return true; }
+            if (duration <= 0) { return true; }
         }
         return false;
     }
@@ -89,6 +101,12 @@ public class Stat
             is_dirty = true;
             modifiers.Add(source, mod);
         }
+    }
+
+    public bool RemoveModifier(string source)
+    {
+        is_dirty = true;
+        return modifiers.Remove(source);
     }
 
     public bool RemoveModifier(string source, Modifier mod)
@@ -151,13 +169,27 @@ public class Stat
 }
 
 [System.Serializable]
+public class Effect
+{
+    public uint id;
+    public string name;
+    public EffectType type;
+    public float duration;
+
+    private Dictionary<string, Modifier> ModTable = new Dictionary<string, Modifier>();
+
+    public Effect() { }
+}
+
+
+[System.Serializable]
 public class Skill
 {
     public uint id;
     public string name;
     public float dmg;
     public float cd;
-    public List<string> tags;
+    public List<string> flags;
     public List<uint> effects;
 }
 
@@ -167,12 +199,78 @@ public class Organ
     public uint id;
     public string name;
     private readonly string buff_json;
-    private Dictionary<string, int> modifiers = new Dictionary<string, int>();
+    private Dictionary<string, Modifier> modifiers = new Dictionary<string, Modifier>();
+
+    public Organ(uint i, string n) 
+    {
+        id = i;
+        name = n;
+        if (i == 0)
+        {
+            modifiers.Add("speed", new Modifier(0.5f, 0, ModType.Flat));
+            modifiers.Add("base_atk_bonus", new Modifier(8f, 0, ModType.Flat));
+        }
+        else if (i == 1)
+        {
+            modifiers.Add("carapace", new Modifier(10f, 0, ModType.Flat));
+        }
+        else
+        {
+            modifiers.Add("max_health", new Modifier(0.1f, 0, ModType.Percentile));
+        }
+    }
+    
+    public Organ(Organ other) 
+    {
+        this.id = other.id;
+        this.name = other.name;
+        this.buff_json = other.buff_json;
+        this.modifiers = new Dictionary<string, Modifier>();
+        foreach(KeyValuePair<string, Modifier> kvp in other.modifiers)
+        {
+            this.modifiers[kvp.Key] = kvp.Value;
+        }
+    }
 
     public void LoadModifiers()
     {
-        modifiers = JsonConvert.DeserializeObject<Dictionary<string, int>>(buff_json);
+        //modifiers = JsonConvert.DeserializeObject<Dictionary<string, int>>(buff_json);
     }
 
+    public List<Modifier> GetModifiers()
+    {
+        List<Modifier> res = new List<Modifier>();
+        foreach(KeyValuePair<string, Modifier> kvp in modifiers) 
+        {
+            res.Add(kvp.Value);
+        }
 
+        return res;
+    }
+
+    public void ApplyModifiers(CharacterInfo character)
+    {
+        foreach (KeyValuePair<string, Modifier> kvp in modifiers)
+        {
+            character.BuffStat(kvp.Key, kvp.Value, name);
+        }
+    }
+
+    public void RemoveModifiers(CharacterInfo character)
+    {
+        foreach (KeyValuePair<string, Modifier> kvp in modifiers)
+        {
+            character.BuffStat(kvp.Key, kvp.Value, name);
+        }
+    }
+
+    public string ModString()
+    {
+        string res = string.Empty;
+        foreach(KeyValuePair<string, Modifier> kvp in modifiers)
+        {
+            res += kvp.Key + " -- " + kvp.Value.ToString() + "\n";
+        }
+        return res;
+    }
 }
