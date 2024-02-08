@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         character_info = Instantiate(template);
-        character_info.gm = GameObject.FindWithTag("Ruleset").GetComponent<GameMaster>();
+        character_info.gm = GameMaster._instance;
         hp_slider = health_bar.GetComponent<Slider>();
     }
 

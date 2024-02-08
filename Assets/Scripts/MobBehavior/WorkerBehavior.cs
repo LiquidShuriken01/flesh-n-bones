@@ -46,7 +46,7 @@ public class WorkerBehavior : MonoBehaviour
         {
             if (collider.CompareTag("Player"))
             {
-                CharacterInfo target_info = collider.gameObject.GetComponent<FPSControl>().player_info;
+                CharacterInfo target_info = collider.gameObject.GetComponent<PlayerDataHandler>().player_info;
                 if (target_info != null)
                 {
                     int accuracy = character_info.GetStatValueInt("base_atk_bonus");

@@ -10,15 +10,18 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     public bool has_item = false;
     int slot_index = -1;
     public string current_organ_name = string.Empty;
+    SummaryTextBlock summaryBlock;
 
     void Start()
     {
         has_item = (transform.childCount > 0);
         slot_index = transform.GetSiblingIndex();
+        summaryBlock = transform.parent.GetChild(transform.parent.childCount - 1).gameObject.GetComponent<SummaryTextBlock>();
         if (has_item)
         {
             DraggableItem draggableItem = transform.GetChild(0).GetComponent<DraggableItem>();
             UpdateSummary(draggableItem);
+            ApplyOrganModifiers();
         }
     }
 
@@ -26,16 +29,12 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         if (has_item && transform.childCount == 0)
         {
-            Debug.Log("Organ lost...");
+            Debug.Log("Organ missing...");
             has_item = false;
-
-            SummaryTextBlock summary_block = transform.parent.GetChild(transform.parent.childCount - 1).gameObject.GetComponent<SummaryTextBlock>();
-            summary_block.RemoveEntry(current_organ_name);
+            RemoveOrganModifiers();
+            summaryBlock.RemoveEntry(current_organ_name);
+            
             current_organ_name = string.Empty;
-        }
-        else if (!has_item && transform.childCount > 0)
-        {
-            has_item = true;
         }
     }
 
@@ -50,36 +49,47 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             has_item = true;
 
             UpdateSummary(draggableItem);
+            ApplyOrganModifiers();
         }
         else
         {
             // Swap items
-            DraggableItem prev_item = transform.GetChild(0).GetComponent<DraggableItem>();
+            DraggableItem prevItem = transform.GetChild(0).GetComponent<DraggableItem>();
             transform.GetChild(0).SetParent(draggableItem.endParent);
-            draggableItem.endParent.gameObject.GetComponent<ItemSlot>().UpdateSummary(prev_item);
+            ItemSlot otherSlot = draggableItem.endParent.gameObject.GetComponent<ItemSlot>();
+            otherSlot.UpdateSummary(prevItem);
+            otherSlot.ApplyOrganModifiers();
             draggableItem.endParent = transform;
-            
             UpdateSummary(draggableItem);
+            ApplyOrganModifiers();
         }
     }
 
-    /* TODO: Create an adjacency checking function, probably using GameObject reference variables.
-     * Make another function for calculating stat bonuses from item held and its adjacencies.
-     * Report total bonus to a character stats Scriptable Object.
-     */
+    
     public void UpdateSummary(DraggableItem item)
     {
         current_organ_name = item.this_organ.name;
-        GameObject summary_block = transform.parent.GetChild(transform.parent.childCount-1).gameObject;
         DataManager dm = DataManager._instance;
         string summary = dm.organ_list[(int)item.item_id].name + ":\n" + item.this_organ.ModString();
-        summary_block.GetComponent<SummaryTextBlock>().AddEntry(item.this_organ.name, summary);
+        summaryBlock.AddEntry(item.this_organ.name, summary);
     }
 
-    public void ApplyModifiers()
+    public void ApplyOrganModifiers()
     {
-        CharacterInfo player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterInfo>();
+        CharacterInfo player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDataHandler>().player_info;
         DraggableItem item = transform.GetChild(0).GetComponent<DraggableItem>();
-        item.this_organ.ApplyModifiers(player);
+
+        /* TODO: Create an adjacency checking function, probably using GameObject reference variables.
+         * Make another function for calculating stat bonuses from item held and its adjacencies.
+         * Report total bonus to a character stats Scriptable Object.
+         */
+
+        item.this_organ.ApplyModifiers(player); // Apply only the base modifiers for now
+    }
+
+    public void RemoveOrganModifiers()
+    {
+        CharacterInfo player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDataHandler>().player_info;
+        player.RemoveBuff(current_organ_name);
     }
 }

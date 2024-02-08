@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class FPSControl : MonoBehaviour
 {
-    public PlayerInfo player_info;
 
     public float turnSpeed = 4.0f;
     public float moveSpeed = 2.0f;
@@ -25,7 +24,6 @@ public class FPSControl : MonoBehaviour
     void Start()
     {
         cam = transform.GetChild(0).gameObject;
-        player_info.gm = GameMaster._instance;
     }
 
     // Update is called once per frame
@@ -53,7 +51,7 @@ public class FPSControl : MonoBehaviour
             Debug.Log($"Looking at {hit.collider.gameObject.tag}");
             if (Input.GetMouseButtonDown(0) && !paused)
             {
-                player_info.Interact(hit.collider.gameObject);
+                gameObject.GetComponent<PlayerDataHandler>().PlayerInteract(hit.collider.gameObject);
             }
         }
 

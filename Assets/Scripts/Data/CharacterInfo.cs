@@ -86,6 +86,7 @@ public class CharacterInfo : ScriptableObject
             }
         }
 
+        Debug.Log($"New Stat! \"{statName}\"");
         bool rounding = (mod.mod_type == ModType.Flat);
         Stat new_stat = AddStat(statName, 0f, rounding);
         new_stat.AddModifier(source, mod);

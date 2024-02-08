@@ -22,6 +22,10 @@ public class PlayerInfo : CharacterInfo
             CharacterInfo enemy_info = target.GetComponent<Enemy>().character_info;
             this.gm.AttackRoll(enemy_info, this.char_name, this.GetStatValueInt("base_atk_bonus"), 10, AtkType.Carapace);
         }
+        else if (target.CompareTag("Interactable"))
+        {
+            Debug.Log("Not yet implemented");
+        }
     }
 
     //void Update() {

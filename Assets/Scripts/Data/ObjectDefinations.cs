@@ -207,7 +207,7 @@ public class Organ
         name = n;
         if (i == 0)
         {
-            modifiers.Add("speed", new Modifier(0.5f, 0, ModType.Flat));
+            modifiers.Add("speed", new Modifier(1f, 0, ModType.Flat));
             modifiers.Add("base_atk_bonus", new Modifier(8f, 0, ModType.Flat));
         }
         else if (i == 1)
@@ -256,13 +256,6 @@ public class Organ
         }
     }
 
-    public void RemoveModifiers(CharacterInfo character)
-    {
-        foreach (KeyValuePair<string, Modifier> kvp in modifiers)
-        {
-            character.BuffStat(kvp.Key, kvp.Value, name);
-        }
-    }
 
     public string ModString()
     {

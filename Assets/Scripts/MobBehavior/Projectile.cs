@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour
         var other = collision.gameObject;
         if (other.CompareTag("Player"))
         {
-            CharacterInfo target_info = other.GetComponent<FPSControl>().player_info;
+            CharacterInfo target_info = other.GetComponent<PlayerDataHandler>().player_info;
             if (target_info != null)
             {
                 gm.AttackRoll(target_info, origin_name, accuracy, damage, atk_type);
