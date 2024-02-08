@@ -21,7 +21,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         {
             DraggableItem draggableItem = transform.GetChild(0).GetComponent<DraggableItem>();
             UpdateSummary(draggableItem);
-            ApplyOrganModifiers();
+            ApplyOrganModifiers(draggableItem);
         }
     }
 
@@ -36,6 +36,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             
             current_organ_name = string.Empty;
         }
+        else if (!has_item && transform.childCount > 0) { has_item = true; }
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -49,7 +50,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             has_item = true;
 
             UpdateSummary(draggableItem);
-            ApplyOrganModifiers();
+            ApplyOrganModifiers(draggableItem);
         }
         else
         {
@@ -58,10 +59,10 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             transform.GetChild(0).SetParent(draggableItem.endParent);
             ItemSlot otherSlot = draggableItem.endParent.gameObject.GetComponent<ItemSlot>();
             otherSlot.UpdateSummary(prevItem);
-            otherSlot.ApplyOrganModifiers();
+            otherSlot.ApplyOrganModifiers(prevItem);
             draggableItem.endParent = transform;
             UpdateSummary(draggableItem);
-            ApplyOrganModifiers();
+            ApplyOrganModifiers(draggableItem);
         }
     }
 
@@ -74,10 +75,9 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         summaryBlock.AddEntry(item.this_organ.name, summary);
     }
 
-    public void ApplyOrganModifiers()
+    public void ApplyOrganModifiers(DraggableItem item)
     {
         CharacterInfo player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDataHandler>().player_info;
-        DraggableItem item = transform.GetChild(0).GetComponent<DraggableItem>();
 
         /* TODO: Create an adjacency checking function, probably using GameObject reference variables.
          * Make another function for calculating stat bonuses from item held and its adjacencies.

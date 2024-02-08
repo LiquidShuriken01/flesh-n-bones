@@ -99,7 +99,7 @@ public class Stat
         if (mod.value != 0)
         {
             is_dirty = true;
-            modifiers.Add(source, mod);
+            modifiers[source] = mod;
         }
     }
 
