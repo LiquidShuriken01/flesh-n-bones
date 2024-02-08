@@ -149,7 +149,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41434286}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1211,10 +1211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f42ef81c5bd410d40bf6303dc0570f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_info: {fileID: 0}
-  fishhead_info: {fileID: 0}
-  worker_info: {fileID: 0}
-  cancer_info: {fileID: 0}
+  player_info: {fileID: 11400000, guid: c34fa685970ff7745aafed8f7a602cb2, type: 2}
+  fishhead_info: {fileID: 11400000, guid: 77d16b0003f984449b48e33a254b1160, type: 2}
+  worker_info: {fileID: 11400000, guid: b8660dbd03d3ef146b7419041bbfcc02, type: 2}
+  cancer_info: {fileID: 11400000, guid: 1601562b578893947964ecac7cbd90f5, type: 2}
   organs_in_session: 0
   skill_list: []
   organ_list: []
@@ -1226,6 +1226,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 505626435}
     m_Modifications:
+    - target: {fileID: 73957911531669917, guid: 34ecc80fff4d79244b84014db9622dac, type: 3}
+      propertyPath: item_id
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 142815201787653579, guid: 34ecc80fff4d79244b84014db9622dac, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

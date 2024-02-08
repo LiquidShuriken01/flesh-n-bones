@@ -46,7 +46,7 @@ public class DataManager : MonoBehaviour
         else
         {
             //LoadSkills();
-            //LoadOrgans();
+            LoadOrgans();
             LoadPlayerInfo();
             LoadMobInfo();
             _instance = this;
@@ -119,9 +119,9 @@ public class DataManager : MonoBehaviour
 
     void Update()
     {
-        if (player_info.health <= 0)
+        /*if (player_info.health <= 0)
         {
             SceneManager.LoadScene("IntroSlides");
-        }
+        }*/
     }
 }
