@@ -5,18 +5,37 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour, IDropHandler, IEndDragHandler
+public class ItemSlot : MonoBehaviour, IDropHandler
 {
     public bool has_item = false;
     int slot_index = -1;
+    public string current_organ_name = string.Empty;
 
     void Start()
     {
         has_item = (transform.childCount > 0);
         slot_index = transform.GetSiblingIndex();
-        if(has_item)
+        if (has_item)
         {
-            UpdateSummary(transform.GetChild(0).GetComponent<DraggableItem>());
+            DraggableItem draggableItem = transform.GetChild(0).GetComponent<DraggableItem>();
+            UpdateSummary(draggableItem);
+        }
+    }
+
+    void Update()
+    {
+        if (has_item && transform.childCount == 0)
+        {
+            Debug.Log("Organ lost...");
+            has_item = false;
+
+            SummaryTextBlock summary_block = transform.parent.GetChild(transform.parent.childCount - 1).gameObject.GetComponent<SummaryTextBlock>();
+            summary_block.RemoveEntry(current_organ_name);
+            current_organ_name = string.Empty;
+        }
+        else if (!has_item && transform.childCount > 0)
+        {
+            has_item = true;
         }
     }
 
@@ -28,36 +47,19 @@ public class ItemSlot : MonoBehaviour, IDropHandler, IEndDragHandler
         if(!has_item)
         {
             draggableItem.endParent = transform;
-            has_item= true;
+            has_item = true;
 
             UpdateSummary(draggableItem);
         }
         else
         {
-            // Swap item
+            // Swap items
             DraggableItem prev_item = transform.GetChild(0).GetComponent<DraggableItem>();
             transform.GetChild(0).SetParent(draggableItem.endParent);
+            draggableItem.endParent.gameObject.GetComponent<ItemSlot>().UpdateSummary(prev_item);
             draggableItem.endParent = transform;
-            UpdateSummary(prev_item);
+            
             UpdateSummary(draggableItem);
-        }
-    }
-
-
-    public void OnEndDrag(PointerEventData eventData) 
-    {
-        Debug.Log("End drag. Checking organ status...");
-
-        if (has_item && transform.childCount == 0)
-        {
-            Debug.Log("Organ lost...");
-            has_item = false;
-
-            GameObject item = eventData.pointerDrag;
-            GameObject summary_block = transform.parent.GetChild(transform.parent.childCount-1).gameObject;
-            DraggableItem draggableItem = item.GetComponent<DraggableItem>();
-            DataManager dm = DataManager._instance;
-            summary_block.GetComponent<SummaryTextBlock>().RemoveEntry(draggableItem.this_organ.name);
         }
     }
 
@@ -67,6 +69,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler, IEndDragHandler
      */
     public void UpdateSummary(DraggableItem item)
     {
+        current_organ_name = item.this_organ.name;
         GameObject summary_block = transform.parent.GetChild(transform.parent.childCount-1).gameObject;
         DataManager dm = DataManager._instance;
         string summary = dm.organ_list[(int)item.item_id].name + ":\n" + item.this_organ.ModString();

@@ -16,6 +16,7 @@ public class SummaryTextBlock : MonoBehaviour
 
     public void RemoveEntry(string source) 
     {
+        //Debug.Log("Removing " +  source);
         info.Remove(source);
         UpdateText();
     }
@@ -23,10 +24,13 @@ public class SummaryTextBlock : MonoBehaviour
     private void UpdateText()
     {
         string text_block = string.Empty;
+        //string organ_names = string.Empty;
         foreach(KeyValuePair<string, string> kvp in info)
         { 
             text_block += kvp.Value;
+            //organ_names += (kvp.Key + "\t");
         }
         gameObject.GetComponent<TMP_Text>().text = text_block;
+        //Debug.Log(organ_names);
     }
 }

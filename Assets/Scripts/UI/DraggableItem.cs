@@ -28,7 +28,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         gameObject.GetComponent<Image>().raycastTarget = false;
-        endParent.GetComponent<ItemSlot>().has_item = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -41,6 +40,13 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Debug.Log("End Drag");
         transform.SetParent(endParent);
         gameObject.GetComponent<Image>().raycastTarget = true;
+
+        ItemSlot slot = endParent.gameObject.GetComponent<ItemSlot>();
+        if (!slot.has_item)
+        {
+            slot.has_item = true;
+            slot.UpdateSummary(this);
+        }
     }
 
 }
