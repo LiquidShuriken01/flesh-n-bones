@@ -48,15 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b2ae64506f5814a8a8468ac278667b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5614547546867349727, guid: d2e8c621f59be904291176ea6d7e6250, type: 3}
+  target: {fileID: 0}
   origin_name: fishface420
   accuracy: 0
   damage: 0
   atk_type: 1
   homing: 1
   speed: 3
-  rotation_speed: 150
-  life_span: 10
+  rotation_speed: 120
+  life_span: 5
 --- !u!33 &5403939427987788019
 MeshFilter:
   m_ObjectHideFlags: 0
