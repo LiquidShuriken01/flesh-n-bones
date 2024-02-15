@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3310073802721672547}
   - component: {fileID: 4485180611921786875}
   - component: {fileID: 9214934545585491125}
+  - component: {fileID: 3888881844594785355}
   - component: {fileID: 5829309479259017611}
   m_Layer: 2
   m_Name: Player
@@ -150,15 +151,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e2ec1c6f72b0e45a6bdab740c8e162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerInfo: {fileID: 11400000, guid: c34fa685970ff7745aafed8f7a602cb2, type: 2}
   turnSpeed: 4
-  moveSpeed: 2
+  moveSpeed: 4
   minTurnAngle: -80
   maxTurnAngle: 80
   interactDist: 1.5
   layersToHit:
     serializedVersion: 2
     m_Bits: 192
+--- !u!114 &3888881844594785355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4549775289562476807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37a06dce83ef0b4b8db3fff4b3f4c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_info: {fileID: 11400000, guid: c34fa685970ff7745aafed8f7a602cb2, type: 2}
 --- !u!195 &5829309479259017611
 NavMeshAgent:
   m_ObjectHideFlags: 0
