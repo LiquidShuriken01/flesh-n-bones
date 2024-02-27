@@ -15,6 +15,21 @@ public class WorldItem : MonoBehaviour
         _canvas = GameObject.FindGameObjectWithTag("UICanvas");
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I) && _container != null)
+        {
+            bool looted = _container.transform.GetChild(0).childCount == 0;
+            Destroy(_container);
+            _container = null;
+            
+            if(looted)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     public void ShowContainer()
     {
         _container = Instantiate(Container);
@@ -22,5 +37,7 @@ public class WorldItem : MonoBehaviour
         _container.GetComponent<RectTransform>().anchoredPosition = new Vector2(40f, -40f);
         var item = _container.transform.GetChild(0).GetChild(0).GetComponent<DraggableItem>();
         item.item_id = this.item_id;
+
+        _canvas.transform.GetChild(0).gameObject.SetActive(true);
     }
 }
