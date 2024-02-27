@@ -36,6 +36,7 @@ public class DataManager : MonoBehaviour
     public int organs_in_session = 0;
     public List<Skill> skill_list = new List<Skill>();
     public List<Organ> organ_list = new List<Organ>();
+    public List<Effect> effect_list = new List<Effect>();
 
     private void Awake()
     {

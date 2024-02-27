@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Interactable
   - Ruleset
+  - Item
+  - UICanvas
   layers:
   - Default
   - TransparentFX

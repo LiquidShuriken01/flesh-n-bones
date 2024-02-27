@@ -178,7 +178,13 @@ public class Effect
 
     private Dictionary<string, Modifier> ModTable = new Dictionary<string, Modifier>();
 
-    public Effect() { }
+    public Effect(uint i, string n, EffectType t, float d)
+    {
+        id = i;
+        name = n;
+        type = t;
+        duration = d;
+    }
 }
 
 

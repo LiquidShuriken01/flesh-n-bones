@@ -42,11 +42,12 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         gameObject.GetComponent<Image>().raycastTarget = true;
 
         ItemSlot slot = endParent.gameObject.GetComponent<ItemSlot>();
-        if (!slot.has_item)
+        if (slot != null & !slot.has_item)
         {
             slot.has_item = true;
             slot.UpdateSummary(this);
         }
     }
+
 
 }

@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
     public bool has_item = false;
-    int slot_index = -1;
     public string current_organ_name = string.Empty;
     SummaryTextBlock summaryBlock;
-
+    int slot_index = -1;
+    
     void Start()
     {
         has_item = (transform.childCount > 0);

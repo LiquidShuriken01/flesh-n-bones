@@ -26,6 +26,10 @@ public class PlayerInfo : CharacterInfo
         {
             Debug.Log("Not yet implemented");
         }
+        else if (target.CompareTag("Item"))
+        {
+            target.GetComponent<WorldItem>().ShowContainer();
+        }
     }
 
     //void Update() {
