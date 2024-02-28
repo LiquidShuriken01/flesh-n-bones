@@ -9,6 +9,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     [HideInInspector]
     public Transform endParent;
+    public GameObject InWorldItem;
     public uint item_id = 0;
     public int organ_session_id = -1;
     public Organ this_organ = null;
@@ -33,6 +34,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
+        Debug.Log(eventData.pointerCurrentRaycast.gameObject != null);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -41,7 +43,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(endParent);
         gameObject.GetComponent<Image>().raycastTarget = true;
 
-        ItemSlot slot = endParent.gameObject.GetComponent<ItemSlot>();
+        if (eventData.pointerCurrentRaycast.gameObject == null)
+        {
+            Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            Vector3 spawnPos = playerTransform.position + .5f * playerTransform.forward;
+            var worldItem = Instantiate(InWorldItem, spawnPos, playerTransform.rotation);
+            worldItem.GetComponent<WorldItem>().item_id = this.item_id;
+            Destroy(gameObject);
+            return;
+        }
+
+            ItemSlot slot = endParent.gameObject.GetComponent<ItemSlot>();
         if (slot != null & !slot.has_item)
         {
             slot.has_item = true;

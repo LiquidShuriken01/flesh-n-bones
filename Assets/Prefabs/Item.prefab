@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endParent: {fileID: 0}
+  InWorldItem: {fileID: 541106272482267823, guid: 984f0eb6343b23047b41be78ea3036a0, type: 3}
   item_id: 0
   organ_session_id: -1
   this_organ:
