@@ -14,6 +14,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public int organ_session_id = -1;
     public Organ this_organ = null;
 
+    public bool in_invt = true;
+
     void Start()
     {
         DataManager dm = DataManager._instance;
@@ -34,7 +36,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
-        Debug.Log(eventData.pointerCurrentRaycast.gameObject != null);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -46,20 +47,21 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (eventData.pointerCurrentRaycast.gameObject == null)
         {
             Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-            Vector3 spawnPos = playerTransform.position + .5f * playerTransform.forward;
+            Vector3 spawnPos = playerTransform.position + .75f * playerTransform.forward;
             var worldItem = Instantiate(InWorldItem, spawnPos, playerTransform.rotation);
             worldItem.GetComponent<WorldItem>().item_id = this.item_id;
             Destroy(gameObject);
             return;
         }
 
-            ItemSlot slot = endParent.gameObject.GetComponent<ItemSlot>();
-        if (slot != null & !slot.has_item)
+        ItemSlot slot = endParent.gameObject.GetComponent<ItemSlot>();
+        if (slot != null)
         {
-            slot.has_item = true;
-            slot.UpdateSummary(this);
+            if (!slot.has_item)
+            {
+                slot.has_item = true;
+                slot.UpdateSummary(this);
+            }
         }
     }
-
-
 }

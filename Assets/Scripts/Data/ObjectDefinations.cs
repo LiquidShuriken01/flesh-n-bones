@@ -211,18 +211,20 @@ public class Organ
     {
         id = i;
         name = n;
-        if (i == 0)
+        switch (i)
         {
-            modifiers.Add("speed", new Modifier(1f, 0, ModType.Flat));
-            modifiers.Add("base_atk_bonus", new Modifier(8f, 0, ModType.Flat));
-        }
-        else if (i == 1)
-        {
-            modifiers.Add("carapace", new Modifier(10f, 0, ModType.Flat));
-        }
-        else
-        {
-            modifiers.Add("max_health", new Modifier(0.1f, 0, ModType.Percentile));
+            case 0:
+                modifiers.Add("speed", new Modifier(1f, 0, ModType.Flat));
+                modifiers.Add("base_atk_bonus", new Modifier(8f, 0, ModType.Flat));
+                break;
+            case 1:
+                modifiers.Add("carapace", new Modifier(10f, 0, ModType.Flat));
+                break;
+            case 2:
+                modifiers.Add("max_health", new Modifier(0.1f, 0, ModType.Percentile));
+                break;
+            default:
+                break;
         }
     }
     

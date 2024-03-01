@@ -41,7 +41,6 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        /* TODO: World-to-Inventory item movement */
         GameObject item = eventData.pointerDrag;
         DraggableItem draggableItem = item.GetComponent<DraggableItem>();
         if(!has_item)
@@ -52,20 +51,22 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             UpdateSummary(draggableItem);
             ApplyOrganModifiers(draggableItem);
         }
-        else
+        else if (summaryBlock)
         {
             // Swap items
             DraggableItem prevItem = transform.GetChild(0).GetComponent<DraggableItem>();
-            transform.GetChild(0).SetParent(draggableItem.endParent);
             ItemSlot otherSlot = draggableItem.endParent.gameObject.GetComponent<ItemSlot>();
-            otherSlot.UpdateSummary(prevItem);
-            otherSlot.ApplyOrganModifiers(prevItem);
-            draggableItem.endParent = transform;
-            UpdateSummary(draggableItem);
-            ApplyOrganModifiers(draggableItem);
+            if (otherSlot != null)
+            {
+                transform.GetChild(0).SetParent(draggableItem.endParent);
+                otherSlot.UpdateSummary(prevItem);
+                otherSlot.ApplyOrganModifiers(prevItem);
+                draggableItem.endParent = transform;
+                UpdateSummary(draggableItem);
+                ApplyOrganModifiers(draggableItem);
+            }
         }
     }
-
     
     public void UpdateSummary(DraggableItem item)
     {
