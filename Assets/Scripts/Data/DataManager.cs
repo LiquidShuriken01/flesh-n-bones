@@ -98,9 +98,10 @@ public class DataManager : MonoBehaviour
     private void LoadPlayerInfo()
     {
         player_info.ClearStats();
-        player_info.AddStat("max_health", 100f, false);
-        player_info.AddStat("max_nerve", 20f, false);
+        player_info.AddStat("max_health", 100f);
+        player_info.AddStat("max_nerve", 20f);
         player_info.AddStat("base_atk_bonus", 5f, true);
+        player_info.AddStat("speed", 5f, true, false);
         player_info.AddStat("carapace", 50f, true);
         player_info.AddStat("mucus", 50f, true);
         player_info.AddStat("ectoplasm", 50f, true);
@@ -110,7 +111,7 @@ public class DataManager : MonoBehaviour
     private void LoadMobInfo()
     {
         fishhead_info.ClearStats();
-        fishhead_info.AddStat("max_health", 50f, false);
+        fishhead_info.AddStat("max_health", 50f);
         fishhead_info.AddStat("base_atk_bonus", 5f, true);
         fishhead_info.AddStat("carapace", 30f, true);
         fishhead_info.AddStat("mucus", 30f, true);

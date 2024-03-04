@@ -82,16 +82,18 @@ public class Stat
     private readonly string name;
     private bool is_dirty = false;
     private readonly bool rounding;
+    private readonly bool can_be_neg;
     private float value;
     private Dictionary<string, Modifier> modifiers;
-    
-    public Stat(string n, float baseValue, bool rounding) 
+
+    public Stat(string n, float baseValue, bool rounding=false, bool canBeNeg=true)
     {
         this.name = n;
         this.base_value = baseValue;
         this.value = baseValue;
         this.rounding = rounding;
-        this.modifiers = new Dictionary<string,Modifier>();
+        this.can_be_neg = canBeNeg;
+        this.modifiers = new Dictionary<string, Modifier>();
     }
 
     public void AddModifier(string source, Modifier mod)

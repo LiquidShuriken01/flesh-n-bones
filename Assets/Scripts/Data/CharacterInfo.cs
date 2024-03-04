@@ -22,9 +22,9 @@ public class CharacterInfo : ScriptableObject
 
     public GameMaster gm;
 
-    public Stat AddStat(string statName, float baseValue, bool rounding)
+    public Stat AddStat(string statName, float baseValue, bool rounding=false, bool canBeNeg=true)
     {
-        Stat new_stat = new Stat(statName, baseValue, rounding);
+        Stat new_stat = new Stat(statName, baseValue, rounding, canBeNeg);
         stat_block.Add(new_stat);
         if (statName == "max_health") { max_health = baseValue; }
         if (statName == "max_nerve") { max_nerve = baseValue; }

@@ -18,6 +18,8 @@ public class FPSControl : MonoBehaviour
     GameObject cam;
     Ray contextRay;
 
+    PlayerDataHandler dataHandler;
+
     bool paused = false;
     bool lockCam = false;
 
@@ -25,6 +27,7 @@ public class FPSControl : MonoBehaviour
     void Start()
     {
         cam = transform.GetChild(0).gameObject;
+        dataHandler = gameObject.GetComponent<PlayerDataHandler>();
 
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
@@ -35,6 +38,7 @@ public class FPSControl : MonoBehaviour
         lockCam = GameObject.FindGameObjectWithTag("UICanvas").transform.GetChild(0).gameObject.activeInHierarchy;
         UnityEngine.Cursor.lockState = lockCam ? CursorLockMode.None : CursorLockMode.Locked;
 
+        moveSpeed = 2.5f + 1.25f * Mathf.Log10(dataHandler.player_info.GetStatValueInt("speed")+1);
 
         // Move Camera
         if (!lockCam)
@@ -63,7 +67,7 @@ public class FPSControl : MonoBehaviour
             Debug.Log($"Looking at {hit.collider.gameObject.tag}");
             if (Input.GetMouseButtonDown(0) && !paused)
             {
-                gameObject.GetComponent<PlayerDataHandler>().PlayerInteract(hit.collider.gameObject);
+                dataHandler.PlayerInteract(hit.collider.gameObject);
             }
         }
 
