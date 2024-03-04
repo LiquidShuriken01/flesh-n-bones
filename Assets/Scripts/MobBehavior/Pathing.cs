@@ -150,6 +150,8 @@ public class Pathing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        agent.speed = 1f + Mathf.Log10(character_info.GetStatValueInt("speed") + 1);
+
         if (!character_info.dead && !attacking)
         {
             distance = (this.transform.position - target.transform.position).magnitude;

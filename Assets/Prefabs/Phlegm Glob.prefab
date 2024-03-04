@@ -54,8 +54,8 @@ MonoBehaviour:
   damage: 0
   atk_type: 1
   homing: 1
-  speed: 3
-  rotation_speed: 120
+  speed: 4
+  rotation_speed: 90
   life_span: 5
 --- !u!33 &5403939427987788019
 MeshFilter:

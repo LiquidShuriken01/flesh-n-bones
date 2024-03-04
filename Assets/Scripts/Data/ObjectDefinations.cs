@@ -131,6 +131,7 @@ public class Stat
                 _value += kvp.Value.value * base_value;
             }
         }
+        if (!can_be_neg && _value < 0)  { return 0; }
         if (rounding)  { return (float)System.Math.Round(_value, 0); }
         else  { return (float)System.Math.Round(_value, 3); }
     }
