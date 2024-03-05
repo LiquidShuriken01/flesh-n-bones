@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6988294544198536997}
   - component: {fileID: 6730798821348596210}
   - component: {fileID: 1749120285636179576}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: World Item
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -147,5 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Container: {fileID: 2836356554418234236, guid: f924b93272b45bd4fa0f11d7d9729f02, type: 3}
-  Item: {fileID: 541106272482267823}
   item_id: 1

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public Transform target;
+    [HideInInspector] public Transform target;
     public string origin_name;
     public int accuracy = 0;
     public float damage;
@@ -14,15 +14,19 @@ public class Projectile : MonoBehaviour
     private GameMaster gm;
     private Rigidbody rb;
     [SerializeField] private bool homing;
+    [SerializeField] private bool persistant;
     [SerializeField] private float speed;
     [SerializeField] private float rotation_speed;
     [SerializeField] private float life_span = 10f;
+    [SerializeField] private float proc_interval;
+    private float proc_time;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         gm = GameMaster._instance;
         rb = GetComponent<Rigidbody>();
+        proc_time = proc_interval;
 
         Vector3 dir = target.position - transform.position;
         Quaternion rot = Quaternion.LookRotation(dir);
@@ -43,19 +47,37 @@ public class Projectile : MonoBehaviour
         rb.velocity = transform.forward * speed;
 
         life_span -= Time.deltaTime;
+        proc_time -= Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
+    {
+        if (!persistant)
+        {
+            var other = collision.gameObject;
+            if (other.CompareTag("Player"))
+            {
+                CharacterInfo target_info = other.GetComponent<PlayerDataHandler>().player_info;
+                if (target_info != null)
+                {
+                    gm.AttackRoll(target_info, origin_name, accuracy, damage, atk_type);
+                }
+            }
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
     {
         var other = collision.gameObject;
         if (other.CompareTag("Player"))
         {
             CharacterInfo target_info = other.GetComponent<PlayerDataHandler>().player_info;
-            if (target_info != null)
+            if (target_info != null && proc_time <= 0f)
             {
                 gm.AttackRoll(target_info, origin_name, accuracy, damage, atk_type);
+                proc_time = proc_interval;
             }
         }
-        Destroy(gameObject);
     }
 }
