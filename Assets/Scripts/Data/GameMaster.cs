@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.Networking.UnityWebRequest;
 
 public class GameMaster : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class GameMaster : MonoBehaviour
 
     private int Roll(int threshold, int modifier)
     {
-        int result = Random.Range(1, 100) + modifier;
+        int result = UnityEngine.Random.Range(1, 100) + modifier;
         log.text = log.text + "\n" + $"Rolled {result} vs. {threshold}";
         Debug.Log($"Rolled {result} vs. {threshold}");
         if (result < threshold - 25) { return 0; }
@@ -37,7 +37,14 @@ public class GameMaster : MonoBehaviour
         else { return 3; }
     }
 
-    public void AttackRoll(CharacterInfo target, string name, int acc, float damage, AtkType atkType)
+    private void Damage(CharacterInfo target, string name, int dmg, string hitResult="")
+    {
+        log.text = log.text + "\n" + $"{hitResult}{name} deals {dmg} damage to {target.char_name}.";
+        Debug.Log($"{hitResult}{name} deals {dmg} damage to {target.char_name}.");
+        target.TakeDamage(dmg);
+    }
+
+    public void AttackRoll(CharacterInfo target, string name, int acc, float damage, AtkType atkType, List<Effect> hitEffects=null, List<Effect> critEffects =null)
     {
         int dmg;
         string target_stat = "";
@@ -62,24 +69,41 @@ public class GameMaster : MonoBehaviour
                 break;
             case 1:
                 dmg = Mathf.RoundToInt(damage * 0.5f);
-                log.text = log.text + "\n" + $"Grazing Hit. {name} deals {dmg} damage to {target.char_name}.";
-                Debug.Log($"Grazing Hit. {name} deals {dmg} damage to {target.char_name}.");
-                target.TakeDamage(dmg);
+                Damage(target, name, dmg, "Grazing Hit -- ");
                 break;
             case 2:
                 dmg = Mathf.RoundToInt(damage);
-                log.text = log.text + "\n" + $"Hit. {name} deals {dmg} damage to {target.char_name}.";
-                Debug.Log($"Hit. {name} deals {dmg} damage to {target.char_name}.");
-                target.TakeDamage(dmg);
+                Damage(target, name, dmg, "Hit -- ");
+                if (hitEffects == null) break;
+                foreach (Effect e in hitEffects)
+                {
+                    e.ApplyModifiers(target);
+                }
                 break;
             case 3:
                 dmg = Mathf.RoundToInt(damage * 1.5f);
-                log.text = log.text + "\n" + $"Critical Hit! {name} deals {dmg} damage to {target.char_name}.";
-                Debug.Log($"Critical Hit! {name} deals {dmg} damage to {target.char_name}.");
-                target.TakeDamage(dmg);
+                Damage(target, name, dmg, "Critical Hit! -- ");
+                if (hitEffects != null)
+                {
+                    foreach (Effect e0 in hitEffects)
+                    {
+                        e0.ApplyModifiers(target);
+                    }
+                }
+                if (critEffects != null)
+                {
+                    foreach (Effect e1 in critEffects)
+                    {
+                        e1.ApplyModifiers(target);
+                    }
+                }
                 break;
             default: break;
         }
     }
 
+    public void BasicResistRoll(CharacterInfo target, int intensity, Effect e)
+    {
+
+    }
 }

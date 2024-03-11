@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6988294544198536997}
   - component: {fileID: 6730798821348596210}
   - component: {fileID: 1749120285636179576}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: World Item
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &1749120285636179576
 MonoBehaviour:

@@ -27,7 +27,7 @@ public enum EffectType
 
 /* TODO:
  *      Implement a Damage class that contains a list of damages by types.
- *      Some functions ideas are: ToString() for log purposes, ApplyResistances() reduce each damage according to
+ *      Some function ideas are: ToString() for log purposes, ApplyResistances() reduce each damage according to
  *      target's resistances.
  *      TakeDamage() will be modified to take in Damage as param.
  */
@@ -35,12 +35,14 @@ public enum EffectType
 [System.Serializable]
 public class Modifier
 {
+    public string stat_name { get; private set; }
     public float value { get; private set; }
     public float duration { get; private set; }
     public ModType mod_type { get; private set; }
 
-    public Modifier(float value, float duration, ModType modType)
+    public Modifier(string name, float value, float duration, ModType modType)
     {
+        this.stat_name = name;
         this.value = value;
         this.duration = duration;
         this.mod_type = modType;
@@ -48,7 +50,7 @@ public class Modifier
 
     public override string ToString()
     {
-        return ((value > 0) ? "+" : "") + value.ToString() + ((mod_type == ModType.Percentile) ? "%" : "");
+        return stat_name + " -- " + ((value > 0) ? "+" : "") + value.ToString() + ((mod_type == ModType.Percentile) ? "%" : "");
     }
 
     public bool Tick()
@@ -179,7 +181,7 @@ public class Effect
     public EffectType type;
     public float duration;
 
-    private Dictionary<string, Modifier> ModTable = new Dictionary<string, Modifier>();
+    private List<Modifier> ModTable = new List<Modifier>();
 
     public Effect(uint i, string n, EffectType t, float d)
     {
@@ -187,6 +189,14 @@ public class Effect
         name = n;
         type = t;
         duration = d;
+    }
+
+    public void ApplyModifiers(CharacterInfo character)
+    {
+        foreach (Modifier mod in ModTable)
+        {
+            character.BuffStat(mod, name);
+        }
     }
 }
 
@@ -208,7 +218,7 @@ public class Organ
     public uint id;
     public string name;
     private readonly string buff_json;
-    private Dictionary<string, Modifier> modifiers = new Dictionary<string, Modifier>();
+    private List<Modifier> modifiers = new List<Modifier>();
 
     public Organ(uint i, string n) 
     {
@@ -217,14 +227,14 @@ public class Organ
         switch (i)
         {
             case 0:
-                modifiers.Add("speed", new Modifier(1f, 0, ModType.Flat));
-                modifiers.Add("base_atk_bonus", new Modifier(8f, 0, ModType.Flat));
+                modifiers.Add(new Modifier("speed", 1f, 0, ModType.Flat));
+                modifiers.Add(new Modifier("base_atk_bonus", 8f, 0, ModType.Flat));
                 break;
             case 1:
-                modifiers.Add("carapace", new Modifier(10f, 0, ModType.Flat));
+                modifiers.Add(new Modifier("carapace", 10f, 0, ModType.Flat));
                 break;
             case 2:
-                modifiers.Add("max_health", new Modifier(0.1f, 0, ModType.Percentile));
+                modifiers.Add(new Modifier("max_health", 0.1f, 0, ModType.Percentile));
                 break;
             default:
                 break;
@@ -236,10 +246,10 @@ public class Organ
         this.id = other.id;
         this.name = other.name;
         this.buff_json = other.buff_json;
-        this.modifiers = new Dictionary<string, Modifier>();
-        foreach(KeyValuePair<string, Modifier> kvp in other.modifiers)
+        this.modifiers = new List<Modifier>();
+        foreach(Modifier mod in other.modifiers)
         {
-            this.modifiers[kvp.Key] = kvp.Value;
+            this.modifiers.Add(mod);
         }
     }
 
@@ -251,9 +261,9 @@ public class Organ
     public List<Modifier> GetModifiers()
     {
         List<Modifier> res = new List<Modifier>();
-        foreach(KeyValuePair<string, Modifier> kvp in modifiers) 
+        foreach(Modifier mod in modifiers) 
         {
-            res.Add(kvp.Value);
+            res.Add(mod);
         }
 
         return res;
@@ -261,9 +271,9 @@ public class Organ
 
     public void ApplyModifiers(CharacterInfo character)
     {
-        foreach (KeyValuePair<string, Modifier> kvp in modifiers)
+        foreach (Modifier mod in modifiers)
         {
-            character.BuffStat(kvp.Key, kvp.Value, name);
+            character.BuffStat(mod, name);
         }
     }
 
@@ -271,9 +281,9 @@ public class Organ
     public string ModString()
     {
         string res = string.Empty;
-        foreach(KeyValuePair<string, Modifier> kvp in modifiers)
+        foreach(Modifier mod in modifiers)
         {
-            res += kvp.Key + " -- " + kvp.Value.ToString() + "\n";
+            res += mod.ToString() + "\n";
         }
         return res;
     }

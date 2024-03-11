@@ -20,6 +20,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float life_span = 10f;
     [SerializeField] private float proc_interval;
     private float proc_time;
+    private List<Effect> hit_effects;
+    private List<Effect> crit_effects;
 
     private void Start()
     {
@@ -28,9 +30,12 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         proc_time = proc_interval;
 
-        Vector3 dir = target.position - transform.position;
-        Quaternion rot = Quaternion.LookRotation(dir);
-        transform.rotation = rot;
+        if (homing)
+        {
+            Vector3 dir = target.position - transform.position;
+            Quaternion rot = Quaternion.LookRotation(dir);
+            transform.rotation = rot;
+        }
     }
 
     private void FixedUpdate()
@@ -79,5 +84,10 @@ public class Projectile : MonoBehaviour
                 proc_time = proc_interval;
             }
         }
+    }
+
+    public void AddEffect(Effect effect)
+    {
+        //effects.Add(effect);
     }
 }

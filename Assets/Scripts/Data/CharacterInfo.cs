@@ -17,8 +17,8 @@ public class CharacterInfo : ScriptableObject
     public bool dead = false;
 
     // These info will be loaded from external files in the future
-    [SerializeField]
     private List<Stat> stat_block = new();
+    private List<List<Effect>> effect_lists = new();
 
     public GameMaster gm;
 
@@ -67,18 +67,18 @@ public class CharacterInfo : ScriptableObject
         nerve = max_nerve;
     }
 
-    public void BuffStat(string statName, Modifier mod, string source)
+    public void BuffStat(Modifier mod, string source)
     {
         foreach (Stat stat in stat_block)
         {
-            if (stat.IsStatName(statName))
+            if (stat.IsStatName(mod.stat_name))
             {
                 stat.AddModifier(source, mod);
-                if (statName == "max_health")
+                if (mod.stat_name == "max_health")
                 {
                     max_health = stat.total_value;
                 }
-                if (statName == "max_nerve")
+                if (mod.stat_name == "max_nerve")
                 {
                     max_nerve = stat.total_value;
                 }
@@ -86,17 +86,17 @@ public class CharacterInfo : ScriptableObject
             }
         }
 
-        Debug.Log($"New Stat! \"{statName}\"");
+        Debug.Log($"New Stat! \"{mod.stat_name}\"");
         bool rounding = (mod.mod_type == ModType.Flat);
-        Stat new_stat = AddStat(statName, 0f, rounding);
+        Stat new_stat = AddStat(mod.stat_name, 0f, rounding);
         new_stat.AddModifier(source, mod);
     }
 
     public void BuffStat(string statName, float value, float duration, ModType modType, string source)
     {
-        Modifier new_mod = new Modifier(value, duration, modType);
+        Modifier new_mod = new Modifier(statName, value, duration, modType);
 
-        BuffStat(statName, new_mod, source);
+        BuffStat(new_mod, source);
     }
 
     public void RemoveBuff(string source) 
