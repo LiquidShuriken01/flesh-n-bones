@@ -14,6 +14,8 @@ public class PlayerDataHandler : MonoBehaviour
 
     void Update()
     {
+        player_info.StatTick();
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log(player_info.GetStatValueInt("base_atk_bonus"));

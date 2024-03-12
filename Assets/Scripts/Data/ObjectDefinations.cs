@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.Linq;
+using UnityEditor;
 
 public enum ModType
 {
@@ -57,6 +58,7 @@ public class Modifier
     {
         if (this.duration > 0)
         {
+            Debug.Log($"{this.stat_name} modifier ticks...");
             duration -= Time.deltaTime;
             if (duration <= 0) { return true; }
         }
@@ -162,6 +164,7 @@ public class Stat
         {
             if (kvp.Value.Tick())
             {
+                Debug.Log($"Effect {kvp.Key}: {this.name} modifier wears off");
                 srcToRemove.Add(kvp.Key);
                 modToRemove.Add(kvp.Value);
             }

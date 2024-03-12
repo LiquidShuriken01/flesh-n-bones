@@ -38,7 +38,7 @@ public class FPSControl : MonoBehaviour
         lockCam = GameObject.FindGameObjectWithTag("UICanvas").transform.GetChild(0).gameObject.activeInHierarchy;
         UnityEngine.Cursor.lockState = lockCam ? CursorLockMode.None : CursorLockMode.Locked;
 
-        moveSpeed = 2f + 1.5f * Mathf.Log10(dataHandler.player_info.GetStatValueInt("speed")+1);
+        moveSpeed = 0.5f + 3f * Mathf.Log10(dataHandler.player_info.GetStatValueInt("speed")+1);
 
         // Move Camera
         if (!lockCam)
