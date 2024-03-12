@@ -107,6 +107,17 @@ public class CharacterInfo : ScriptableObject
         }
     }
 
+    /* progresses time for each Modifier affecting each Stat
+     * call this in Update() of PlayerInfo for each Stat in its list
+     */
+    public void StatTick()
+    {
+        foreach (Stat stat in stat_block)
+        {
+            stat.ModifiersTick();
+        }
+    }
+
     public void TakeDamage(int dmg)
     {
         if (dmg < 0)

@@ -20,8 +20,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float life_span = 10f;
     [SerializeField] private float proc_interval;
     private float proc_time;
-    private List<Effect> hit_effects;
-    private List<Effect> crit_effects;
+    [SerializeField] private List<int> hit_effects;
+    [SerializeField] private List<int> crit_effects;
 
     private void Start()
     {
@@ -80,7 +80,7 @@ public class Projectile : MonoBehaviour
             CharacterInfo target_info = other.GetComponent<PlayerDataHandler>().player_info;
             if (target_info != null && proc_time <= 0f)
             {
-                gm.AttackRoll(target_info, origin_name, accuracy, damage, atk_type);
+                gm.AttackRoll(target_info, origin_name, accuracy, damage, atk_type, hit_effects);
                 proc_time = proc_interval;
             }
         }

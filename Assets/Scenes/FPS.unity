@@ -960,6 +960,8 @@ MonoBehaviour:
   rotation_speed: 0
   life_span: 15
   proc_interval: 5
+  hit_effects: 00000000
+  crit_effects: 
 --- !u!136 &989959244
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2716,14 +2718,6 @@ PrefabInstance:
     - target: {fileID: 541106272482267823, guid: 984f0eb6343b23047b41be78ea3036a0, type: 3}
       propertyPath: m_Name
       value: World Item
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730798821348596210, guid: 984f0eb6343b23047b41be78ea3036a0, type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730798821348596210, guid: 984f0eb6343b23047b41be78ea3036a0, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8410769214607023811, guid: 984f0eb6343b23047b41be78ea3036a0, type: 3}
       propertyPath: m_LocalPosition.x

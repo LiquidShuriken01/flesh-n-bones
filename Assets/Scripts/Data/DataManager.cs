@@ -36,7 +36,7 @@ public class DataManager : MonoBehaviour
     public int organs_in_session = 0;
     public List<Skill> skill_list = new List<Skill>();
     public List<Organ> organ_list = new List<Organ>();
-    //public List<Effect> effect_list = new List<Effect>();
+    public List<Effect> effect_list = new List<Effect>();
     /* The effect_list should be a set of base effects, e.g. lifeleech, stunned */
 
     private void Awake()
@@ -51,6 +51,11 @@ public class DataManager : MonoBehaviour
             LoadOrgans();
             LoadPlayerInfo();
             LoadMobInfo();
+
+            Effect slowed = new Effect(0, "slowed", EffectType.Debuff, 2.5f);
+            slowed.AddModifier("speed", -10f, ModType.Flat);
+            effect_list.Add(slowed);
+
             _instance = this;
         }
 

@@ -191,6 +191,12 @@ public class Effect
         duration = d;
     }
 
+    public void AddModifier(string targetStat, float modVal, ModType modType)
+    {
+        Modifier new_mod = new Modifier(targetStat, modVal, duration, modType);
+        ModTable.Add(new_mod);
+    }
+
     public void ApplyModifiers(CharacterInfo character)
     {
         foreach (Modifier mod in ModTable)

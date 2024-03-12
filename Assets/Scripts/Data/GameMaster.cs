@@ -44,7 +44,7 @@ public class GameMaster : MonoBehaviour
         target.TakeDamage(dmg);
     }
 
-    public void AttackRoll(CharacterInfo target, string name, int acc, float damage, AtkType atkType, List<Effect> hitEffects=null, List<Effect> critEffects =null)
+    public void AttackRoll(CharacterInfo target, string name, int acc, float damage, AtkType atkType, List<int> hitEffects=null, List<int> critEffects =null)
     {
         int dmg;
         string target_stat = "";
@@ -75,9 +75,10 @@ public class GameMaster : MonoBehaviour
                 dmg = Mathf.RoundToInt(damage);
                 Damage(target, name, dmg, "Hit -- ");
                 if (hitEffects == null) break;
-                foreach (Effect e in hitEffects)
+                foreach (int e in hitEffects)
                 {
-                    e.ApplyModifiers(target);
+                    DataManager._instance.effect_list[e].ApplyModifiers(target);
+                    Debug.Log("Applied effect " + DataManager._instance.effect_list[e].name);
                 }
                 break;
             case 3:
@@ -85,16 +86,18 @@ public class GameMaster : MonoBehaviour
                 Damage(target, name, dmg, "Critical Hit! -- ");
                 if (hitEffects != null)
                 {
-                    foreach (Effect e0 in hitEffects)
+                    foreach (int e in hitEffects)
                     {
-                        e0.ApplyModifiers(target);
+                        DataManager._instance.effect_list[e].ApplyModifiers(target);
+                        Debug.Log("Applied effect " + DataManager._instance.effect_list[e].name);
                     }
                 }
                 if (critEffects != null)
                 {
-                    foreach (Effect e1 in critEffects)
+                    foreach (int e in critEffects)
                     {
-                        e1.ApplyModifiers(target);
+                        DataManager._instance.effect_list[e].ApplyModifiers(target);
+                        Debug.Log("Applied effect " + DataManager._instance.effect_list[e].name);
                     }
                 }
                 break;
