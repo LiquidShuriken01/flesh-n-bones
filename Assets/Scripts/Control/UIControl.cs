@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class UIControl : MonoBehaviour
     GameObject pause_text;
     PlayerInfo player_data;
     Slider hp_slider;
+    TMP_Text bone_counter;
     bool inv_is_active = false;
     bool show_reticle = true;
     bool paused = false;
@@ -22,6 +24,7 @@ public class UIControl : MonoBehaviour
         reticle = transform.GetChild(2).gameObject;
         pause_text = transform.GetChild(3).gameObject;
         hp_slider = health_bar.GetComponent<Slider>();
+        bone_counter = transform.GetChild(4).GetComponentInChildren<TMP_Text>();
         inventory.SetActive(inv_is_active);
         reticle.SetActive(show_reticle);
         pause_text.SetActive(paused);
@@ -49,5 +52,7 @@ public class UIControl : MonoBehaviour
 
         hp_slider.maxValue = player_data.max_health;
         hp_slider.value = player_data.health;
+
+        bone_counter.text = player_data.bones.ToString();
     }
 }

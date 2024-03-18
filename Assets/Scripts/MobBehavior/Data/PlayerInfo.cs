@@ -8,6 +8,8 @@ using UnityEngine.Events;
 [CreateAssetMenu]
 public class PlayerInfo : CharacterInfo
 {
+    public int bones;
+
     void OnEnable()
     {
         this.char_name = "Player";

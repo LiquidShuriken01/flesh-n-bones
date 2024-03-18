@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameMaster : MonoBehaviour
 {
@@ -108,5 +109,11 @@ public class GameMaster : MonoBehaviour
     public void BasicResistRoll(CharacterInfo target, int intensity, Effect e)
     {
 
+    }
+
+    public void GiveBones(int amount)
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDataHandler>().player_info.bones += amount;
+        log.text = log.text + "\n" + $"Picked up {amount} bones.";
     }
 }

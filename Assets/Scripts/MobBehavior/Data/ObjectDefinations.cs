@@ -6,6 +6,13 @@ using Newtonsoft.Json;
 using System.Linq;
 using UnityEditor;
 
+public enum DmgType
+{
+    Physical,
+    Corrosive,
+    Psi
+}
+
 public enum ModType
 {
     Flat,
@@ -32,6 +39,31 @@ public enum EffectType
  *      target's resistances.
  *      TakeDamage() will be modified to take in Damage as param.
  */
+public class Damage
+{
+    private float[] dmg_table;
+
+    public Damage()
+    {
+        dmg_table = new float[System.Enum.GetNames(typeof(DmgType)).Length];
+    }
+
+    public Damage(float dmgVal, DmgType dmgType)
+    {
+        dmg_table = new float[System.Enum.GetNames(typeof(DmgType)).Length];
+        dmg_table[(int)dmgType] = dmgVal;
+    }
+
+    public void SetDamage(float dmgVal, DmgType dmgType)
+    {
+        dmg_table[(int)dmgType] = dmgVal;
+    }
+
+    public void GetDamage(float dmgVal, DmgType dmgType)
+    {
+        dmg_table[(int)dmgType] = dmgVal;
+    }
+}
 
 [System.Serializable]
 public class Modifier

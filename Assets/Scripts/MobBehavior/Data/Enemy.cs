@@ -13,12 +13,15 @@ public class Enemy : MonoBehaviour
     public GameObject health_bar;
 
     private Slider hp_slider;
+    private bool loot_dropped;
+    [SerializeField] private int bones = 0;
 
     private void Awake()
     {
         character_info = Instantiate(template);
         character_info.gm = GameMaster._instance;
         hp_slider = health_bar.GetComponent<Slider>();
+        loot_dropped = false;
     }
 
     private void Update()
@@ -27,6 +30,11 @@ public class Enemy : MonoBehaviour
         if (dead)
         {
             health_bar.SetActive(false);
+            if (!loot_dropped)
+            {
+                GameMaster._instance.GiveBones(bones);
+                loot_dropped = true;
+            }
         }
 
         hp_slider.maxValue = character_info.max_health;
