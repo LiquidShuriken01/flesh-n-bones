@@ -1754,6 +1754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: {fileID: 11400000, guid: b8660dbd03d3ef146b7419041bbfcc02, type: 2}
   health_bar: {fileID: 0}
+  bones: 0
 --- !u!224 &2026575276 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3038686996450522071, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
@@ -2071,37 +2072,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 222464676186511297, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 180
-      objectReference: {fileID: 0}
     - target: {fileID: 2190226659913118947, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 548404116}
-    - target: {fileID: 2762446786317337472, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
-      propertyPath: m_Value
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762446786317337472, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
-      propertyPath: m_MinValue
+    - target: {fileID: 6109853402359913713, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6109853402359913713, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6109853402359913713, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6486425115149625265, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
       propertyPath: m_Name
       value: Fish Face
-      objectReference: {fileID: 0}
-    - target: {fileID: 6486425115149625265, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8575738694473287636, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2620,6 +2605,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8601821010219058982, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601821010219058982, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8739562830984848041, guid: 459f4fcb43d03374abd264f0ac314784, type: 3}
