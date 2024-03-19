@@ -16,7 +16,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public bool in_invt = true;
 
-    void Start()
+    void Awake()
     {
         DataManager dm = DataManager._instance;
         this_organ = new Organ(dm.organ_list[(int)item_id]);

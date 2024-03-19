@@ -104,6 +104,7 @@ public class DataManager : MonoBehaviour
     private void LoadPlayerInfo()
     {
         player_info.ClearStats();
+        player_info.bones = 0;
         player_info.AddStat("max_health", 100f);
         player_info.AddStat("max_nerve", 20f);
         player_info.AddStat("base_atk_bonus", 5f, true);
