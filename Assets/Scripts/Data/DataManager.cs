@@ -26,8 +26,6 @@ public class DataManager : MonoBehaviour
         public List<Organ> _list;
     }
 
-    public static DataManager _instance { get; private set; }
-
     /*[SerializeField]
     private List<string> loading_list_skills;
     [SerializeField]
@@ -39,6 +37,10 @@ public class DataManager : MonoBehaviour
     public List<Effect> effect_list = new List<Effect>();
     /* The effect_list should be a set of base effects, e.g. lifeleech, stunned */
 
+    private List<float> cd_timers = new List<float>();
+
+    public static DataManager _instance { get; private set; }
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -47,7 +49,7 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            //LoadSkills();
+            LoadSkills();
             LoadOrgans();
             LoadPlayerInfo();
             LoadMobInfo();
@@ -59,22 +61,29 @@ public class DataManager : MonoBehaviour
             _instance = this;
         }
 
+        
         foreach (Skill skill in skill_list)
         {
             Debug.Log($"{skill.name}");
+            cd_timers.Add(0f);
         }
+        
     }
     
     private void LoadSkills()
     {
         Debug.Log("Loading skill data...");
 
-        string path = $"{Application.dataPath}/Data/skills.json";
+        /*string path = $"{Application.dataPath}/Data/skills.json";
         string json = File.ReadAllText(path);
         SkillList skillList = JsonUtility.FromJson<SkillList>(json);
         skill_list = skillList._list;
 
-        Debug.Log($"... success! {skill_list.Count} skills loaded");
+        Debug.Log($"... success! {skill_list.Count} skills loaded");*/
+
+        // Test case. Will remove later
+        Skill adrenaline_rush = new Skill(0, "Adrenaline Rush", (SkillFlags.TargetSelf & SkillFlags.HasEffect), 1, 15f);
+        skill_list.Add(adrenaline_rush);
     }
 
     private void LoadOrgans()
@@ -113,6 +122,8 @@ public class DataManager : MonoBehaviour
         player_info.AddStat("mucus", 50f, true);
         player_info.AddStat("ectoplasm", 50f, true);
         player_info.RestoreStatus();
+
+        //player_info.MemorizeSkill(0);
     }
 
     private void LoadMobInfo()
@@ -126,11 +137,29 @@ public class DataManager : MonoBehaviour
         fishhead_info.RestoreStatus();
     }
 
+    public void SetSkillCDTimer(int index)
+    {
+        cd_timers[index] = skill_list[index].cd;
+    }
+
+    public bool IsInCD(int index)
+    {
+        return cd_timers[index] > 0f;
+    }
+
     void Update()
     {
         /*if (player_info.health <= 0)
         {
             SceneManager.LoadScene("IntroSlides");
         }*/
+
+        for (int i=0; i<skill_list.Count; i++)
+        {
+            if (cd_timers[i] > 0f)
+            {
+                cd_timers[i] -= Time.deltaTime;
+            }
+        }
     }
 }

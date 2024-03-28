@@ -33,6 +33,14 @@ public enum EffectType
     Debuff
 }
 
+[System.Flags] public enum SkillFlags
+{
+    Attack = 0,
+    CreatesProjectile = 1 << 0,
+    TargetSelf = 1 << 1,
+    HasEffect = 1 << 2,
+}
+
 /* TODO:
  *      Implement a Damage class that contains a list of damages by types.
  *      Some function ideas are: ToString() for log purposes, ApplyResistances() reduce each damage according to
@@ -247,10 +255,54 @@ public class Skill
 {
     public uint id;
     public string name;
-    public float dmg;
+    public SkillFlags flags;
+    public int slot_n = 1;
     public float cd;
-    public List<string> flags;
-    public List<uint> effects;
+
+    private float dmg = 0;
+    private List<int> effects;
+
+    public Skill(uint id, string name, SkillFlags flags, int slot_n, float cd)
+    {
+        this.id = id;
+        this.name = name;
+        this.flags = flags;
+        this.slot_n = slot_n;
+        this.cd = cd;
+    }
+
+    public void AddEffect(int effectID)
+    {
+        effects.Add(effectID);
+    }
+
+    public void SetDamage(float d)
+    {
+        dmg = d;
+    }
+
+    public void Activate()
+    {
+        if (flags.HasFlag(SkillFlags.Attack))
+        {
+            if (flags.HasFlag(SkillFlags.HasEffect))
+            {
+
+            }
+        }
+        else if (flags.HasFlag(SkillFlags.CreatesProjectile)) 
+        {
+
+        }
+        else if (flags.HasFlag(SkillFlags.TargetSelf)) 
+        {
+            PlayerInfo playerInfo = DataManager._instance.player_info;
+            foreach(int i in effects)
+            {
+                DataManager._instance.effect_list[i].ApplyModifiers(playerInfo);
+            }
+        }
+    }
 }
 
 [System.Serializable]
