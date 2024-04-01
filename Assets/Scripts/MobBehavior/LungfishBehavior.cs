@@ -26,14 +26,14 @@ public class LungfishBehavior : MonoBehaviour
         }
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fish_Attack") && pathing_ai.can_attack)
         {
-            pathing_ai.attacking = true;
             animator.SetTrigger("attack");
         }
         else
         {
             animator.ResetTrigger("attack");
-            pathing_ai.attacking = false;
         }
+
+        pathing_ai.attacking = animator.GetCurrentAnimatorStateInfo(0).IsName("Fish_Attack");
     }
 
     // Attacks & Skills

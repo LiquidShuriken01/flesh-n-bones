@@ -2009,7 +2009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 348740865028230263, guid: 494e755edebcc1f4dbddb68cccfe2448, type: 3}
       propertyPath: rotation_speed
-      value: 90
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2041099451317014653, guid: 494e755edebcc1f4dbddb68cccfe2448, type: 3}
       propertyPath: m_Name
@@ -2076,6 +2076,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 548404116}
+    - target: {fileID: 2190226659913118947, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
+      propertyPath: evadeDist
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2190226659913118947, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
+      propertyPath: pursueDist
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6109853402359913713, guid: 37b5829ba7652ee428eec3b7d62cabba, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

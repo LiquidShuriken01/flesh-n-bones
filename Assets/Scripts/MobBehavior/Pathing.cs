@@ -159,15 +159,15 @@ public class Pathing : MonoBehaviour
             if (distance <= evadeDist) { pursue = false; }
             if (pursue)
             {
-                if (distance <= detectDist && distance > pursueDist + 0.5f)
+                if (distance <= detectDist && distance > pursueDist - 0.5f)
                 {
                     Pursue();
                 }
-                //else { Stop(); }
+                else { Stop(); }
             }
             else
             {
-                if (distance < evadeDist - 0.5f)
+                if (distance < evadeDist + 0.5f)
                 {
                     Evade();
                 }

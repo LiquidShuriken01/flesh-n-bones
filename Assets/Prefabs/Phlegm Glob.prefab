@@ -54,9 +54,13 @@ MonoBehaviour:
   damage: 0
   atk_type: 1
   homing: 1
+  persistant: 0
   speed: 4
-  rotation_speed: 90
-  life_span: 5
+  rotation_speed: 60
+  life_span: 3
+  proc_interval: 0
+  hit_effects: 
+  crit_effects: 
 --- !u!33 &5403939427987788019
 MeshFilter:
   m_ObjectHideFlags: 0
