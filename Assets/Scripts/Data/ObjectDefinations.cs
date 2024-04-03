@@ -35,10 +35,11 @@ public enum EffectType
 
 [System.Flags] public enum SkillFlags
 {
-    Attack = 0,
-    CreatesProjectile = 1 << 0,
-    TargetSelf = 1 << 1,
-    HasEffect = 1 << 2,
+    None = 0,
+    Attack = 1 << 0,
+    CreatesProjectile = 1 << 1,
+    TargetSelf = 1 << 2,
+    HasEffect = 1 << 3,
 }
 
 /* TODO:
@@ -269,6 +270,7 @@ public class Skill
         this.flags = flags;
         this.slot_n = slot_n;
         this.cd = cd;
+        effects = new List<int>();
     }
 
     public void AddEffect(int effectID)
@@ -281,8 +283,9 @@ public class Skill
         dmg = d;
     }
 
-    public void Activate()
+    public void Activate(PlayerInfo player)
     {
+        Debug.Log($"{flags.HasFlag(SkillFlags.Attack)}, {flags.HasFlag(SkillFlags.CreatesProjectile)}, {flags.HasFlag(SkillFlags.TargetSelf)}, {flags.HasFlag(SkillFlags.HasEffect)}");
         if (flags.HasFlag(SkillFlags.Attack))
         {
             if (flags.HasFlag(SkillFlags.HasEffect))
@@ -296,10 +299,10 @@ public class Skill
         }
         else if (flags.HasFlag(SkillFlags.TargetSelf)) 
         {
-            PlayerInfo playerInfo = DataManager._instance.player_info;
+            Debug.Log("Buffing Self...");
             foreach(int i in effects)
             {
-                DataManager._instance.effect_list[i].ApplyModifiers(playerInfo);
+                DataManager._instance.effect_list[i].ApplyModifiers(player);
             }
         }
     }

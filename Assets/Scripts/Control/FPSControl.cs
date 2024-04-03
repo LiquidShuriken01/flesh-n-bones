@@ -77,6 +77,11 @@ public class FPSControl : MonoBehaviour
             Time.timeScale = paused ? 0f : 1.0f;
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            dataHandler.UseSkill(0);
+        }
+
         /*if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log(player_info.GetStatValueInt("base_atk_bonus"));

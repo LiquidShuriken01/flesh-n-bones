@@ -57,11 +57,13 @@ public class DataManager : MonoBehaviour
             Effect slowed = new Effect(0, "slowed", EffectType.Debuff, 2.5f);
             slowed.AddModifier("speed", -10f, ModType.Flat);
             effect_list.Add(slowed);
+            Effect adrenaline = new Effect(1, "adrenaline", EffectType.Buff, 2.5f);
+            adrenaline.AddModifier("speed", 20f, ModType.Flat);
+            effect_list.Add(adrenaline);
 
             _instance = this;
         }
 
-        
         foreach (Skill skill in skill_list)
         {
             Debug.Log($"{skill.name}");
@@ -82,7 +84,8 @@ public class DataManager : MonoBehaviour
         Debug.Log($"... success! {skill_list.Count} skills loaded");*/
 
         // Test case. Will remove later
-        Skill adrenaline_rush = new Skill(0, "Adrenaline Rush", (SkillFlags.TargetSelf & SkillFlags.HasEffect), 1, 15f);
+        Skill adrenaline_rush = new Skill(0, "Adrenaline Rush", SkillFlags.TargetSelf | SkillFlags.HasEffect, 1, 15f);
+        adrenaline_rush.AddEffect(1);
         skill_list.Add(adrenaline_rush);
     }
 
@@ -122,8 +125,6 @@ public class DataManager : MonoBehaviour
         player_info.AddStat("mucus", 50f, true);
         player_info.AddStat("ectoplasm", 50f, true);
         player_info.RestoreStatus();
-
-        //player_info.MemorizeSkill(0);
     }
 
     private void LoadMobInfo()

@@ -11,6 +11,7 @@ public class PlayerDataHandler : MonoBehaviour
     void Start()
     {
         player_info.gm = GameMaster._instance;
+        player_info.MemorizeSkill(0); // Testing only, remove later
     }
 
     void Update()
@@ -54,7 +55,7 @@ public class PlayerDataHandler : MonoBehaviour
             Debug.Log($"Skill {DataManager._instance.skill_list[skillID].name} is in cooldown.");
             return;
         }
-        DataManager._instance.skill_list[skillID].Activate();
+        DataManager._instance.skill_list[skillID].Activate(player_info);
         DataManager._instance.SetSkillCDTimer(skillID);
     }
 }
