@@ -16,6 +16,8 @@ public class CharacterInfo : ScriptableObject
 
     public bool dead = false;
 
+    public List<int> organ_drop = new();
+
     // These info will be loaded from external files in the future
     private List<Stat> stat_block = new();
     private List<List<Effect>> effect_lists = new();

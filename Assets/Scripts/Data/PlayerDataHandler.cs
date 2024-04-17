@@ -34,6 +34,7 @@ public class PlayerDataHandler : MonoBehaviour
         if (target.CompareTag("Enemy"))
         {
             CharacterInfo enemy_info = target.GetComponent<Enemy>().character_info;
+            if (enemy_info.dead) return;
             player_info.gm.AttackRoll(enemy_info, player_info.char_name, player_info.GetStatValueInt("base_atk_bonus"), 10, AtkType.Carapace);
         }
         else if (target.CompareTag("Interactable"))

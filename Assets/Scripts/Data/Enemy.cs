@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +17,7 @@ public class Enemy : MonoBehaviour
     private Slider hp_slider;
     private bool loot_dropped;
     [SerializeField] private int bones = 0;
+    private List<int> organ_drop = new List<int>();
 
     private void Awake()
     {
@@ -22,6 +25,10 @@ public class Enemy : MonoBehaviour
         character_info.gm = GameMaster._instance;
         hp_slider = health_bar.GetComponent<Slider>();
         loot_dropped = false;
+        foreach (int i in character_info.organ_drop)
+        {
+            organ_drop.Add(i);
+        }
     }
 
     private void Update()
@@ -34,6 +41,20 @@ public class Enemy : MonoBehaviour
             {
                 GameMaster._instance.GiveBones(bones);
                 loot_dropped = true;
+                Debug.Log("Trying to load Item Prefab from file...");
+                GameObject worldItem = (GameObject)Resources.Load("Itemization/World Item");
+                if (worldItem == null)
+                {
+                    throw new FileNotFoundException("...no file found - please check the configuration");
+                }
+                foreach (int i in organ_drop)
+                {
+                    var randomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                    var newItem = Instantiate(worldItem, transform.position,randomRotation);
+                    WorldItem witm = newItem.GetComponent<WorldItem>();
+                    Rigidbody irb = newItem.GetComponent<Rigidbody>();
+                    irb.AddForce(newItem.transform.right * 0.1f);
+                }
             }
         }
 
