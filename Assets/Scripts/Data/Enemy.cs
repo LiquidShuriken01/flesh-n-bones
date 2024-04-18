@@ -53,7 +53,8 @@ public class Enemy : MonoBehaviour
                     var newItem = Instantiate(worldItem, transform.position,randomRotation);
                     WorldItem witm = newItem.GetComponent<WorldItem>();
                     Rigidbody irb = newItem.GetComponent<Rigidbody>();
-                    irb.AddForce(newItem.transform.right * 0.1f);
+                    irb.velocity = newItem.transform.right * 0.1f + new Vector3(0, 0.1f, 0);
+                    witm.item_id = (uint)i;
                 }
             }
         }

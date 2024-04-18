@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Worker_Corpse
+  m_Name: Fish_Attack_Special
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 624302142, guid: 0695da5ac0364334da95601f179927c6, type: 3}
+      value: {fileID: 899712455, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - time: 0.16666667
+      value: {fileID: 1369570007, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - time: 0.4
+      value: {fileID: 1100180352, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - time: 1.3333334
+      value: {fileID: 1369570007, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - time: 1.5666667
+      value: {fileID: -2071467191, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - time: 1.6666666
+      value: {fileID: 931590309, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,13 +54,18 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 624302142, guid: 0695da5ac0364334da95601f179927c6, type: 3}
+    - {fileID: 899712455, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - {fileID: 1369570007, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - {fileID: 1100180352, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - {fileID: 1369570007, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - {fileID: -2071467191, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
+    - {fileID: 931590309, guid: 3b98d97f6f23b7e4aad65f6dc212f1b4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 1.6833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -69,4 +84,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1
+    functionName: 
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

@@ -9,6 +9,7 @@ TagManager:
   - Ruleset
   - Item
   - UICanvas
+  - Terrain
   layers:
   - Default
   - TransparentFX

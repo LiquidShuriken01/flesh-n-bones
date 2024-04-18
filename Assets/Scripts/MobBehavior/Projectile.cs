@@ -10,10 +10,12 @@ public class Projectile : MonoBehaviour
     public int accuracy = 0;
     public float damage;
     public AtkType atk_type;
+    public GameObject next_proj;
 
     private GameMaster gm;
     private Rigidbody rb;
     [SerializeField] private bool homing;
+    [SerializeField] private bool intermediate;
     [SerializeField] private bool persistant;
     [SerializeField] private float speed;
     [SerializeField] private float rotation_speed;
@@ -57,6 +59,21 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (intermediate)
+        {
+            var other = collision.gameObject;
+            if (other.CompareTag("Terrain"))
+            {
+                if (next_proj == null)
+                {
+                    throw new System.NullReferenceException("Next projectile prefab not found");
+                }
+                var proj = Instantiate(next_proj, transform.position, transform.rotation);
+                Projectile proj_ai = proj.GetComponent<Projectile>();
+                proj_ai.target = this.target;
+                Destroy(gameObject);
+            }
+        }
         if (!persistant)
         {
             var other = collision.gameObject;
