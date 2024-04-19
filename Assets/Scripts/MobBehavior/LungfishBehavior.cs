@@ -57,17 +57,17 @@ public class LungfishBehavior : MonoBehaviour
             throw new FileNotFoundException("...no file found - please check the configuration");
         }
 
-        var launchPos = this.transform.position - 0.2f * this.transform.forward;
+        var launchPos = this.transform.position - 0.4f * this.transform.forward;
         var launchRot = Quaternion.Euler(0, this.transform.rotation.y, 0);
 
-        var newItem = Instantiate(pellet, launchPos, launchRot);
-        WorldItem witm = newItem.GetComponent<WorldItem>();
-        Rigidbody irb = newItem.GetComponent<Rigidbody>();
-        irb.velocity = newItem.transform.right * 0.1f + new Vector3(0, 0.1f, 0);
-
-        var proj_ai = pellet.GetComponent<Projectile>();
-        proj_ai.accuracy = character_info.GetStatValueInt("base_atk_bonus");
-        proj_ai.damage = 7.5f;
-        proj_ai.atk_type = AtkType.Mucus;
+        var newProj0 = Instantiate(pellet, launchPos, Quaternion.Euler(0, this.transform.rotation.y-60f, 0));
+        var newProj1 = Instantiate(pellet, launchPos, Quaternion.Euler(0, this.transform.rotation.y, 0));
+        var newProj2 = Instantiate(pellet, launchPos, Quaternion.Euler(0, this.transform.rotation.y+60f, 0));
+        Rigidbody prb0 = newProj0.GetComponent<Rigidbody>();
+        Rigidbody prb1 = newProj1.GetComponent<Rigidbody>();
+        Rigidbody prb2 = newProj2.GetComponent<Rigidbody>();
+        prb0.velocity = newProj0.transform.forward * 0.25f + new Vector3(0, 0.25f, 0);
+        prb1.velocity = newProj1.transform.forward * 0.25f + new Vector3(0, 0.25f, 0);
+        prb2.velocity = newProj2.transform.forward * 0.25f + new Vector3(0, 0.25f, 0);
     }
 }

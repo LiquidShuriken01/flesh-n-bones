@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8857211180761699394}
   - component: {fileID: 6952473849639997183}
   - component: {fileID: 7682227855729074957}
+  - component: {fileID: 1205095122075508306}
   m_Layer: 0
   m_Name: Acid Pool Pellet
   m_TagString: Untagged
@@ -131,5 +132,32 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1205095122075508306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266657157408815332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b2ae64506f5814a8a8468ac278667b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  origin_name: Environment
+  accuracy: 0
+  damage: 0
+  atk_type: 0
+  next_proj: {fileID: 7709578425257116284, guid: de0c9aae78ea18b4d9929e11d4a02274, type: 3}
+  homing: 0
+  intermediate: 1
+  persistant: 0
+  speed: 0
+  rotation_speed: 0
+  life_span: 10
+  proc_interval: 0
+  hit_effects: 
+  crit_effects: 
